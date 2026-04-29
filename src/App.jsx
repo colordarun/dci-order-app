@@ -79,11 +79,10 @@ export default function DCIOrderApp() {
     const loadInstructors = async () => {
       setLoadingInstructors(true);
       try {
-        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'getInstructors' }),
-        });
+        const response = await fetch(
+          GOOGLE_APPS_SCRIPT_URL + '?action=getInstructors',
+          { method: 'GET' }
+        );
         const result = await response.json();
         if (result.success) setInstructors(result.data);
         else setInstructors([]);
