@@ -70,6 +70,7 @@ export default function DCIOrderApp() {
   const [authenticated, setAuthenticated] = useState(false); // eslint-disable-line no-unused-vars
   const [instructors, setInstructors] = useState([]);
   const [loadingInstructors, setLoadingInstructors] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [currentInstructor, setCurrentInstructor] = useState(null);
   const [cart, setCart] = useState({});
   const [orderForm, setOrderForm] = useState({ email: '', phone: '', address: '', note: '' });
@@ -130,6 +131,8 @@ export default function DCIOrderApp() {
   const getTotalWithShipping = () => calculateTotal() + SHIPPING_FEE;
 
   const handleSubmitOrder = async () => {
+    if (submitting) return;
+    setSubmitting(true);
     const orderData = {
       order_id: `ORD-${Date.now()}`,
       date: new Date().toLocaleString('ko-KR'),
@@ -156,7 +159,7 @@ export default function DCIOrderApp() {
       });
       const result = await response.json();
       if (result.success) { setOrderComplete(true); setStep('confirm'); }
-      else alert('주문 처리 중 오류가 발생했습니다: ' + result.message);
+      else { alert('주문 처리 중 오류가 발생했습니다: ' + result.message); setSubmitting(false); }
     } catch {
       setOrderComplete(true);
       setStep('confirm');
@@ -258,8 +261,8 @@ export default function DCIOrderApp() {
               </div>
             </div>
             <button style={styles.submitButton} onClick={handleSubmitOrder}
-              disabled={Object.keys(cart).length === 0 || !orderForm.email || !orderForm.phone || !orderForm.address}>
-              주문하기
+              disabled={submitting || Object.keys(cart).length === 0 || !orderForm.email || !orderForm.phone || !orderForm.address}>
+              {submitting ? '주문 처리 중...' : '주문하기'}
             </button>
           </div>
         </div>
@@ -273,13 +276,27 @@ export default function DCIOrderApp() {
       <div style={styles.completeBox}>
         <h1 style={styles.completeTitle}>주문이 완료되었습니다</h1>
         <p style={styles.completeMessage}>
-          입금 확인 후, 주문서가 <strong>{currentInstructor.email}</strong>로 발송됩니다.
+          입금 확인 후, 주문서가 <strong>{orderForm.email}</strong>로 발송됩니다.
         </p>
         <div style={styles.accountBox}>
-          <p style={styles.accountLabel}>입금 계좌</p>
-          <p style={styles.accountBank}>국민은행 000-888-0088</p>
-          <p style={styles.accountName}>예금주: 색다른컬러연구소</p>
-          <p style={styles.accountNote}>영업일 기준 2~3일 소요</p>
+          <div style={styles.amountRow}>
+            <span>주문금액 / Order Amount</span>
+            <span>{calculateTotal().toLocaleString()}원</span>
+          </div>
+          <div style={styles.amountRow}>
+            <span>배송비 / Shipping</span>
+            <span>3,000원</span>
+          </div>
+          <div style={{ ...styles.amountRow, borderTop: '1px solid #ddd', paddingTop: '10px', marginTop: '6px', fontWeight: '700', color: '#2c3e50' }}>
+            <span>총액 / Total</span>
+            <span>{getTotalWithShipping().toLocaleString()}원</span>
+          </div>
+        </div>
+        <div style={styles.accountBox}>
+          <p style={styles.accountLabel}>입금 계좌 정보 / Bank Account</p>
+          <p style={styles.accountBank}>국민은행 / Kookmin Bank&nbsp;&nbsp;000-888-0088</p>
+          <p style={styles.accountName}>색다른컬러연구소</p>
+          <p style={styles.accountNote}>배송은 입금 확인 후, 영업일 기준 2~3일 소요<br />Delivery: 2–3 business days after payment</p>
         </div>
         <button style={styles.button} onClick={() => {
           setStep('auth'); setAuthenticated(false); setCertNum(''); setInstructorName('');
@@ -301,7 +318,8 @@ const styles = {
   completeTitle: { fontSize: '26px', fontWeight: '700', margin: '0 0 16px 0', color: '#2c3e50' },
   subtitle: { fontSize: '14px', color: '#aaa', margin: '0 0 28px 0' },
   completeMessage: { fontSize: '15px', color: '#666', lineHeight: '1.7', margin: '0 0 24px 0' },
-  accountBox: { background: '#f4f6f8', borderRadius: '8px', padding: '20px', marginBottom: '28px' },
+  accountBox: { background: '#f4f6f8', borderRadius: '8px', padding: '20px', marginBottom: '16px' },
+  amountRow: { display: 'flex', justifyContent: 'space-between', fontSize: '14px', color: '#555', marginBottom: '6px' },
   accountLabel: { fontSize: '12px', color: '#999', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '0.5px' },
   accountBank: { fontSize: '18px', fontWeight: '700', color: '#2c3e50', margin: '0 0 4px 0' },
   accountName: { fontSize: '14px', color: '#555', margin: '0 0 10px 0' },
