@@ -37,6 +37,31 @@ const PRODUCTS = {
   ],
 };
 
+function formatCertNum(raw) {
+  // 대문자 + 숫자만 허용
+  raw = raw.toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+  // 4자리 연속 숫자가 시작되는 위치를 찾아 첫 번째 dash 위치 결정
+  var prefixEnd = 0;
+  for (var i = 1; i <= raw.length - 4; i++) {
+    if (/^[0-9]{4}$/.test(raw.slice(i, i + 4))) {
+      prefixEnd = i;
+      break;
+    }
+  }
+
+  if (prefixEnd === 0) return raw; // 아직 패턴 감지 불가
+
+  var prefix = raw.slice(0, prefixEnd);
+  var rest = raw.slice(prefixEnd);
+  var year = rest.slice(0, 4);
+  var seq = rest.slice(4, 7);
+
+  if (seq.length > 0) return prefix + '-' + year + '-' + seq;
+  if (year.length > 0) return prefix + '-' + year;
+  return prefix;
+}
+
 export default function DCIOrderApp() {
   const [step, setStep] = useState('auth');
   const [certNum, setCertNum] = useState('');
@@ -148,13 +173,13 @@ export default function DCIOrderApp() {
           <p style={styles.subtitle}>수료번호와 강사명을 입력하세요</p>
           <div style={styles.formGroup}>
             <label style={styles.label}>수료번호</label>
-            <input type="text" placeholder="예: FMI-2604-001" value={certNum}
-              onChange={(e) => setCertNum(e.target.value)} style={styles.input}
+            <input type="text" placeholder="예: AAA-2026-000" value={certNum}
+              onChange={(e) => setCertNum(formatCertNum(e.target.value))} style={styles.input}
               onKeyPress={(e) => e.key === 'Enter' && handleAuth()} />
           </div>
           <div style={styles.formGroup}>
             <label style={styles.label}>강사명</label>
-            <input type="text" placeholder="예: 유재은" value={instructorName}
+            <input type="text" placeholder="예: 홍길동" value={instructorName}
               onChange={(e) => setInstructorName(e.target.value)} style={styles.input}
               onKeyPress={(e) => e.key === 'Enter' && handleAuth()} />
           </div>
