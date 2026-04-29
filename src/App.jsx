@@ -173,10 +173,6 @@ export default function DCIOrderApp() {
         <div style={styles.authBox}>
           <h1 style={styles.title}>DCI 강사 주문 시스템</h1>
           <p style={styles.subtitle}>수료번호와 강사명을 입력하세요</p>
-          <p style={{ fontSize: '11px', color: '#aaa', margin: '0 0 10px 0' }}>
-            [디버그] 강사 데이터: {loadingInstructors ? '로딩중...' : instructors.length + '명 로드됨'}
-            {instructors.length > 0 && ' | 첫번째: ' + instructors[0].id + ' / ' + instructors[0].name}
-          </p>
           <div style={styles.formGroup}>
             <label style={styles.label}>수료번호</label>
             <input type="text" placeholder="예: AAA-2026-000" value={certNum}
