@@ -56,6 +56,7 @@ export default function DCIOrderApp() {
       try {
         const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
           method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({ action: 'getInstructors' }),
         });
         const result = await response.json();
@@ -126,6 +127,7 @@ export default function DCIOrderApp() {
     try {
       const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
         method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ action: 'processOrder', orderData }),
       });
       const result = await response.json();
