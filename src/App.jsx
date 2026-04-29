@@ -42,13 +42,13 @@ export default function DCIOrderApp() {
   const [certNum, setCertNum] = useState('');
   const [instructorName, setInstructorName] = useState('');
   const [authError, setAuthError] = useState('');
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false); // eslint-disable-line no-unused-vars
   const [instructors, setInstructors] = useState([]);
   const [loadingInstructors, setLoadingInstructors] = useState(false);
   const [currentInstructor, setCurrentInstructor] = useState(null);
   const [cart, setCart] = useState({});
   const [orderForm, setOrderForm] = useState({ email: '', phone: '', address: '', note: '' });
-  const [orderComplete, setOrderComplete] = useState(false);
+  const [orderComplete, setOrderComplete] = useState(false); // eslint-disable-line no-unused-vars
 
   useEffect(() => {
     const loadInstructors = async () => {
