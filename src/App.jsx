@@ -64,6 +64,7 @@ function formatCertNum(raw) {
 
 export default function DCIOrderApp() {
   const [step, setStep] = useState('auth');
+  const [fadeIn, setFadeIn] = useState(false);
   const [certNum, setCertNum] = useState('');
   const [instructorName, setInstructorName] = useState('');
   const [authError, setAuthError] = useState('');
@@ -103,7 +104,9 @@ export default function DCIOrderApp() {
     if (instructor) {
       setCurrentInstructor(instructor);
       setAuthenticated(true);
+      setFadeIn(false);
       setStep('order');
+      setTimeout(() => setFadeIn(true), 20);
     } else {
       setAuthError('수료번호 또는 강사명이 일치하지 않습니다.');
     }
@@ -198,7 +201,7 @@ export default function DCIOrderApp() {
   if (step === 'order') {
     return (
       <div style={styles.container}>
-        <div style={styles.orderBox}>
+        <div style={{ ...styles.orderBox, opacity: fadeIn ? 1 : 0, transform: fadeIn ? 'translateY(0)' : 'translateY(18px)', transition: 'opacity 0.45s ease, transform 0.45s ease' }}>
           <div style={styles.header}>
             <h1 style={styles.title}>DCI 강사 주문 시스템</h1>
             <p style={styles.userInfo}>{currentInstructor.name} ({currentInstructor.id})</p>
