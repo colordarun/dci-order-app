@@ -37,6 +37,23 @@ const PRODUCTS = {
   ],
 };
 
+function formatPhone(raw) {
+  const digits = raw.replace(/\D/g, '');
+  if (digits.startsWith('02')) {
+    // 서울 지역번호: 2-3-4 또는 2-4-4
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 5) return digits.slice(0, 2) + '-' + digits.slice(2);
+    if (digits.length <= 9) return digits.slice(0, 2) + '-' + digits.slice(2, 5) + '-' + digits.slice(5);
+    return digits.slice(0, 2) + '-' + digits.slice(2, 6) + '-' + digits.slice(6, 10);
+  } else if (digits.startsWith('0')) {
+    // 010, 011, 031 등: 3-4-4 또는 3-3-4
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 7) return digits.slice(0, 3) + '-' + digits.slice(3);
+    return digits.slice(0, 3) + '-' + digits.slice(3, 7) + '-' + digits.slice(7, 11);
+  }
+  return digits;
+}
+
 function formatCertNum(raw) {
   // 대문자 + 숫자만 허용
   raw = raw.toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -239,7 +256,10 @@ export default function DCIOrderApp() {
               <div key={key} style={styles.formGroup}>
                 <label style={styles.label}>{label}</label>
                 <input type={type} value={orderForm[key]} placeholder={placeholder}
-                  onChange={(e) => setOrderForm({ ...orderForm, [key]: e.target.value })}
+                  onChange={(e) => {
+                    const val = key === 'phone' ? formatPhone(e.target.value) : e.target.value;
+                    setOrderForm({ ...orderForm, [key]: val });
+                  }}
                   style={styles.input} />
               </div>
             ))}
