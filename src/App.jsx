@@ -3,50 +3,48 @@ import React, { useState, useEffect } from 'react';
 // Google Apps Script 배포 URL
 const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxAv-J8yX3Fll8OWgfTfrcgBsQlcZxrF8XpwNrr34Q1NIKO8ZEaTA3_s8cUIX8LtKD0/exec';
 
-// 상품 데이터
+// 상품 데이터 (restricted: true → KFD/KLC 수료번호에 비노출)
 const PRODUCTS = {
   pigments: [
-    { code: 'PIG-Z.BR', name: 'Z브라운 크림', spec: '10g', price: 7000 },
-    { code: 'PWD-Z.BR', name: 'Z브라운 분말', spec: '20g', price: 9000 },
-    { code: 'PIG-X.RD', name: 'X레드 크림', spec: '10g', price: 5000 },
-    { code: 'PIG-Z.RD', name: 'Z레드 크림', spec: '10g/립전용', price: 9000 },
-    { code: 'PIG-YL', name: '옐로우 크림', spec: '10g', price: 5000 },
-    { code: 'PIG-WT', name: '화이트 크림', spec: '10g', price: 4500 },
-    { code: 'PIG-WT.2', name: '화이트 크림 2개 묶음', spec: '10g×2', price: 8000 },
-    { code: 'PIG-BL', name: '블루 액상', spec: '5g', price: 3000 },
-    { code: 'PIG-BK', name: '블랙 액상', spec: '5g', price: 3000 },
-    { code: 'PIG-OR', name: '오렌지 크림', spec: '10g/립전용', price: 5000 },
-    { code: 'PIG-MG', name: '마젠타 크림', spec: '10g/립전용', price: 5000 },
-    { code: 'PIG-VT', name: '바이올렛 액상', spec: '10g', price: 6000 },
+    { code: 'PIG-Z.BR',  name: 'Z브라운 색소 / Z-Brown',               spec: '10g',          price: 7000 },
+    { code: 'PWD-Z.BR',  name: 'Z브라운 색소 분말 / Z-Brown Powder',    spec: '10g, 분말',    price: 9000 },
+    { code: 'PIG-X.RD',  name: 'X레드 색소 / X-Red',                   spec: '10g',          price: 5000 },
+    { code: 'PIG-Z.RD',  name: 'Z레드 색소 / Z-Red',                   spec: '10g, 립 전용', price: 9000 },
+    { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                  spec: '10g',          price: 5000 },
+    { code: 'PIG-WT',    name: '화이트 색소 / White',                   spec: '10g',          price: 4500 },
+    { code: 'PIG-WT.2',  name: '화이트 색소 2개 묶음 / White ×2 Set',  spec: '10g×2',        price: 8000 },
+    { code: 'PIG-VT',    name: '바이올렛 색소 / Violet',                spec: '10g',          price: 6000 },
+    { code: 'PIG-BK',    name: '블랙 색소 / Black',                     spec: '5g',           price: 3000 },
+    { code: 'PIG-BL',    name: '블루 색소 / Blue',                      spec: '5g',           price: 3000,  restricted: true },
+    { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                  spec: '10g, 립 전용', price: 5000,  restricted: true },
+    { code: 'PIG-MG',    name: '마젠타 색소 / Magenta',                 spec: '10g, 립 전용', price: 5000,  restricted: true },
   ],
   binders: [
-    { code: 'BND-FND', name: '파운데이션바인더', spec: '100g', price: 23000 },
-    { code: 'BND-FND.L', name: '파운데이션바인더 대용량', spec: '1L', price: 200000 },
-    { code: 'PWD-MAT', name: '매트파우더', spec: '100g', price: 15000 },
-    { code: 'BND-LIP', name: '립글로스바인더', spec: '50g', price: 3000 },
+    { code: 'BND-FND',   name: '파운데이션 바인더 / Foundation Binder',             spec: '100g',      price: 23000 },
+    { code: 'BND-FND.L', name: '파운데이션 바인더 대용량 / Foundation Binder (1kg)', spec: '1kg',       price: 200000 },
+    { code: 'PWD-MAT',   name: '매트 파우더 / Matte Powder',                        spec: '100g, 분말', price: 15000, restricted: true },
+    { code: 'BND-LIP',   name: '립글로스 바인더 / Lip Gloss Binder',                spec: '50g',       price: 3000,  restricted: true },
   ],
   cards: [
-    { code: 'CARD-SK', name: '진단카드(스킨용)', spec: '10개 묶음', price: 15000 },
-    { code: 'CARD-LP', name: '진단카드(립용)', spec: '10개 묶음', price: 15000 },
-    { code: 'CARD-LC', name: '진단카드(립앤치크용)', spec: '10개 묶음', price: 15000 },
-    { code: 'STCKR-SK', name: '진단스티커(스킨용)', spec: '10개 묶음', price: 30000 },
-    { code: 'CARD-SK1', name: '진단카드(스킨용) 낱개', spec: '1개', price: 2000 },
-    { code: 'CARD-LP1', name: '진단카드(립용) 낱개', spec: '1개', price: 2000 },
-    { code: 'CARD-LC1', name: '진단카드(립앤치크용) 낱개', spec: '1개', price: 2000 },
-    { code: 'STCKR-SK1', name: '진단스티커(스킨용) 낱개', spec: '1장', price: 4000 },
+    { code: 'CARD-SK5',   name: '진단카드(스킨용)*5 / Skin Diagnostic Card *5',              spec: '5개 묶음',  price: 10000 },
+    { code: 'CARD-SK',    name: '진단카드(스킨용)*10 / Skin Diagnostic Card *10',             spec: '10개 묶음', price: 15000 },
+    { code: 'CARD-LP5',   name: '진단카드(립용)*5 / Lip Diagnostic Card *5',                 spec: '5개 묶음',  price: 10000, restricted: true },
+    { code: 'CARD-LP',    name: '진단카드(립용)*10 / Lip Diagnostic Card *10',                spec: '10개 묶음', price: 15000, restricted: true },
+    { code: 'CARD-LC5',   name: '진단카드(립앤치크용)*5 / Lip & Cheek Diagnostic Card *5',   spec: '5개 묶음',  price: 10000 },
+    { code: 'CARD-LC',    name: '진단카드(립앤치크용)*10 / Lip & Cheek Diagnostic Card *10',  spec: '10개 묶음', price: 15000 },
+    { code: 'STCKR-SK5',  name: '진단스티커(스킨용)*5 / Skin Diagnostic Sticker *5',         spec: '5개 묶음',  price: 20000, restricted: true },
+    { code: 'STCKR-SK',   name: '진단스티커(스킨용)*10 / Skin Diagnostic Sticker *10',        spec: '10개 묶음', price: 30000, restricted: true },
   ],
 };
 
 function formatPhone(raw) {
   const digits = raw.replace(/\D/g, '');
   if (digits.startsWith('02')) {
-    // 서울 지역번호: 2-3-4 또는 2-4-4
     if (digits.length <= 2) return digits;
     if (digits.length <= 5) return digits.slice(0, 2) + '-' + digits.slice(2);
     if (digits.length <= 9) return digits.slice(0, 2) + '-' + digits.slice(2, 5) + '-' + digits.slice(5);
     return digits.slice(0, 2) + '-' + digits.slice(2, 6) + '-' + digits.slice(6, 10);
   } else if (digits.startsWith('0')) {
-    // 010, 011, 031 등: 3-4-4 또는 3-3-4
     if (digits.length <= 3) return digits;
     if (digits.length <= 7) return digits.slice(0, 3) + '-' + digits.slice(3);
     return digits.slice(0, 3) + '-' + digits.slice(3, 7) + '-' + digits.slice(7, 11);
@@ -55,10 +53,7 @@ function formatPhone(raw) {
 }
 
 function formatCertNum(raw) {
-  // 대문자 + 숫자만 허용
   raw = raw.toUpperCase().replace(/[^A-Z0-9]/g, '');
-
-  // 4자리 연속 숫자가 시작되는 위치를 찾아 첫 번째 dash 위치 결정
   var prefixEnd = 0;
   for (var i = 1; i <= raw.length - 4; i++) {
     if (/^[0-9]{4}$/.test(raw.slice(i, i + 4))) {
@@ -66,14 +61,11 @@ function formatCertNum(raw) {
       break;
     }
   }
-
-  if (prefixEnd === 0) return raw; // 아직 패턴 감지 불가
-
+  if (prefixEnd === 0) return raw;
   var prefix = raw.slice(0, prefixEnd);
   var rest = raw.slice(prefixEnd);
   var year = rest.slice(0, 4);
   var seq = rest.slice(4, 7);
-
   if (seq.length > 0) return prefix + '-' + year + '-' + seq;
   if (year.length > 0) return prefix + '-' + year;
   return prefix;
@@ -141,6 +133,11 @@ export default function DCIOrderApp() {
 
   const allProducts = [...PRODUCTS.pigments, ...PRODUCTS.binders, ...PRODUCTS.cards];
 
+  // KFD 또는 KLC로 시작하는 수료번호는 restricted 제품 비노출
+  const isKFDorKLC = currentInstructor &&
+    (currentInstructor.id.startsWith('KFD') || currentInstructor.id.startsWith('KLC'));
+  const filterItems = (items) => isKFDorKLC ? items.filter(p => !p.restricted) : items;
+
   const calculateTotal = () =>
     Object.entries(cart).reduce((total, [code, qty]) => {
       const product = allProducts.find((p) => p.code === code);
@@ -149,6 +146,13 @@ export default function DCIOrderApp() {
 
   const SHIPPING_FEE = 3000;
   const getTotalWithShipping = () => calculateTotal() + SHIPPING_FEE;
+
+  const cartItems = Object.entries(cart)
+    .filter(([, qty]) => qty > 0)
+    .map(([code, qty]) => {
+      const product = allProducts.find((p) => p.code === code);
+      return { ...product, quantity: qty, subtotal: product.price * qty };
+    });
 
   const handleSubmitOrder = async () => {
     if (submitting) return;
@@ -163,10 +167,9 @@ export default function DCIOrderApp() {
       phone: orderForm.phone,
       address: orderForm.address,
       note: orderForm.note,
-      items: Object.entries(cart).map(([code, qty]) => {
-        const product = allProducts.find((p) => p.code === code);
-        return { code: product.code, name: product.name, spec: product.spec, price: product.price, quantity: qty, subtotal: product.price * qty };
-      }),
+      items: cartItems.map(({ code, name, spec, price, quantity, subtotal }) => ({
+        code, name, spec, price, quantity, subtotal,
+      })),
       subtotal: calculateTotal(),
       total: getTotalWithShipping(),
     };
@@ -225,26 +228,32 @@ export default function DCIOrderApp() {
           </div>
 
           {[
-            { title: '색소 (Pigment)', items: PRODUCTS.pigments },
-            { title: '바인더 · 파우더', items: PRODUCTS.binders },
-            { title: '진단카드 · 스티커', items: PRODUCTS.cards },
-          ].map(({ title, items }) => (
-            <div key={title} style={styles.category}>
-              <h2 style={styles.categoryTitle}>{title}</h2>
-              {items.map((product) => (
-                <div key={product.code} style={styles.productRow}>
-                  <div style={styles.productInfo}>
-                    <div style={styles.productName}>{product.name}</div>
-                    <div style={styles.productSpec}>{product.spec}</div>
-                  </div>
-                  <div style={styles.productPrice}>{product.price.toLocaleString()}원</div>
-                  <input type="number" min="0" value={cart[product.code] || 0}
-                    onChange={(e) => handleQuantityChange(product.code, parseInt(e.target.value) || 0)}
-                    style={styles.quantityInput} />
+            { title: '색소류 (Pigment)', items: PRODUCTS.pigments },
+            { title: '바인더류 (Binder & Powder)', items: PRODUCTS.binders },
+            { title: '진단카드·스티커류 (Diagnostic Card & Sticker)', items: PRODUCTS.cards },
+          ].map(({ title, items }) => {
+            const visibleItems = filterItems(items);
+            if (visibleItems.length === 0) return null;
+            return (
+              <div key={title} style={styles.category}>
+                <h2 style={styles.categoryTitle}>{title}</h2>
+                <div style={styles.categoryBody}>
+                  {visibleItems.map((product) => (
+                    <div key={product.code} style={styles.productRow}>
+                      <div style={styles.productInfo}>
+                        <div style={styles.productName}>{product.name}</div>
+                        <div style={styles.productSpec}>{product.spec}</div>
+                      </div>
+                      <div style={styles.productPrice}>{product.price.toLocaleString()}원</div>
+                      <input type="number" min="0" value={cart[product.code] || 0}
+                        onChange={(e) => handleQuantityChange(product.code, parseInt(e.target.value) || 0)}
+                        style={styles.quantityInput} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            );
+          })}
 
           <div style={styles.shippingSection}>
             <h2 style={styles.categoryTitle}>배송 정보</h2>
@@ -272,6 +281,23 @@ export default function DCIOrderApp() {
           </div>
 
           <div style={styles.footer}>
+            {/* 주문 내역 요약 */}
+            {cartItems.length > 0 && (
+              <div style={styles.orderSummary}>
+                <div style={styles.summaryTitle}>주문 내역</div>
+                {cartItems.map((item, idx) => (
+                  <div key={item.code} style={styles.summaryRow}>
+                    <span style={styles.summaryIndex}>{idx + 1}.</span>
+                    <span style={styles.summaryName}>{item.name}</span>
+                    <span style={styles.summarySpec}>({item.spec})</span>
+                    <span style={styles.summaryQty}>×{item.quantity}</span>
+                    <span style={styles.summarySubtotal}>{item.subtotal.toLocaleString()}원</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* 금액 합계 */}
             <div style={styles.totalDetails}>
               <div style={styles.totalRow}><span>상품 총액</span><span>{calculateTotal().toLocaleString()}원</span></div>
               <div style={styles.totalRow}><span>배송비</span><span>+{SHIPPING_FEE.toLocaleString()}원</span></div>
@@ -280,7 +306,7 @@ export default function DCIOrderApp() {
               </div>
             </div>
             <button style={styles.submitButton} onClick={handleSubmitOrder}
-              disabled={submitting || Object.keys(cart).length === 0 || !orderForm.email || !orderForm.phone || !orderForm.address}>
+              disabled={submitting || cartItems.length === 0 || !orderForm.email || !orderForm.phone || !orderForm.address}>
               {submitting ? '주문 처리 중...' : '주문하기'}
             </button>
           </div>
@@ -354,6 +380,7 @@ const styles = {
   submitButton: { display: 'block', width: '100%', padding: '14px', background: '#2c3e50', color: 'white', border: 'none', borderRadius: '6px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', marginTop: '20px' },
   category: { marginBottom: '28px' },
   categoryTitle: { fontSize: '15px', fontWeight: '700', color: '#2c3e50', margin: '0 0 12px 0', paddingBottom: '10px', borderBottom: '2px solid #f0f0f0' },
+  categoryBody: { paddingLeft: '12px' },
   productRow: { display: 'flex', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #f5f5f5' },
   productInfo: { flex: 1 },
   productName: { fontSize: '14px', fontWeight: '500', color: '#333' },
@@ -362,6 +389,14 @@ const styles = {
   quantityInput: { width: '52px', padding: '6px', marginLeft: '12px', border: '1px solid #ddd', borderRadius: '4px', fontSize: '14px', textAlign: 'center' },
   shippingSection: { marginTop: '36px', paddingTop: '28px', borderTop: '2px solid #f0f0f0' },
   footer: { marginTop: '28px', paddingTop: '20px', borderTop: '1px solid #eee' },
+  orderSummary: { background: '#f9f9f9', borderRadius: '6px', padding: '14px 16px', marginBottom: '18px' },
+  summaryTitle: { fontSize: '13px', fontWeight: '700', color: '#2c3e50', marginBottom: '10px', letterSpacing: '0.3px' },
+  summaryRow: { display: 'flex', alignItems: 'baseline', gap: '6px', fontSize: '13px', color: '#555', marginBottom: '6px' },
+  summaryIndex: { minWidth: '18px', color: '#aaa' },
+  summaryName: { flex: 1, color: '#333' },
+  summarySpec: { fontSize: '12px', color: '#aaa' },
+  summaryQty: { minWidth: '32px', textAlign: 'right', color: '#888' },
+  summarySubtotal: { minWidth: '72px', textAlign: 'right', fontWeight: '600', color: '#2c3e50' },
   totalDetails: { textAlign: 'right', marginBottom: '4px' },
   totalRow: { display: 'flex', justifyContent: 'flex-end', gap: '24px', fontSize: '14px', color: '#666', marginBottom: '6px' },
 };
