@@ -229,7 +229,7 @@ export default function DCIOrderApp() {
 
           {[
             { title: '색소류 (Pigment)', items: PRODUCTS.pigments },
-            { title: '바인더류 (Binder & Powder)', items: PRODUCTS.binders },
+            { title: '바인더류 (Binder)', items: PRODUCTS.binders },
             { title: '진단카드·스티커류 (Diagnostic Card & Sticker)', items: PRODUCTS.cards },
           ].map(({ title, items }) => {
             const visibleItems = filterItems(items);
