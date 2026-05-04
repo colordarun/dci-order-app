@@ -259,7 +259,7 @@ export default function DCIOrderApp() {
           <p style={styles.subtitle}>수료번호와 강사명을 입력하세요</p>
           <div style={styles.formGroup}>
             <label style={styles.label}>수료번호</label>
-            <input type="text" placeholder="예: CCM1-2026-001" value={certNum}
+            <input type="text" placeholder="예: ABC-1234-000" value={certNum}
               onChange={(e) => setCertNum(formatCertNum(e.target.value))} style={styles.input}
               onKeyPress={(e) => e.key === 'Enter' && handleAuth()} />
           </div>
