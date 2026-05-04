@@ -78,6 +78,29 @@ const COURSE_PRODUCTS = {
   ],
 };
 
+// MSDS PDF 파일 매핑: 제품코드 → 파일명(public/msds/{파일명}.pdf)
+// 같은 파일명 = 공유 MSDS (중복 자동 제거)
+// PDF 파일 추가 시 내게 알려주면 반영해줄게
+const MSDS_MAP = {
+  'PIG-Z.BR':   'PIG-Z.BR_msds',
+  'PWD-Z.BR':   'PWD-Z.BR_msds',
+  'PIG-X.RD':   'PIG-X.RD_msds',
+  'PIG-Z.RD':   'PIG-Z.RD_msds',
+  'PIG-YL':     'PIG-YL_msds',
+  'PIG-WT':     'PIG-WT_msds',
+  'PIG-WT.2':   'PIG-WT_msds',     // 공용
+  'PIG-OR':     'PIG-OR_msds',
+  'PIG-MG':     'PIG-MG_msds',
+  'PIG-VT':     'PIG-VT_msds',
+  'BND-FND100': 'BND-FND_msds',
+  'BND-FND1k':  'BND-FND_msds',    // 공용
+  'PWD-MAT':    'PWD-MAT_msds',
+  'BND-LIP1':   'BND-LIP_msds',
+  'BND-LIP5':   'BND-LIP_msds',    // 공용
+  // PIG-BL, PIG-BK → 파일 없음
+  // CARD, STCKR, BTL → 해당 없음
+};
+
 function formatPhone(raw) {
   const digits = raw.replace(/\D/g, '');
   if (digits.startsWith('02')) {
@@ -227,6 +250,20 @@ export default function DCIOrderApp() {
       return { ...product, quantity: qty, price, subtotal: price * qty };
     });
 
+  // MSDS 제공 가능한 항목 (중복 파일명 제거)
+  const msdsItems = (() => {
+    const seen = new Set();
+    const result = [];
+    cartItems.forEach(item => {
+      const file = MSDS_MAP[item.code];
+      if (file && !seen.has(file)) {
+        seen.add(file);
+        result.push({ ...item, msdsFile: file });
+      }
+    });
+    return result;
+  })();
+
   const handleSubmitOrder = async () => {
     if (submitting) return;
     setSubmitting(true);
@@ -254,11 +291,11 @@ export default function DCIOrderApp() {
         body: JSON.stringify({ action: 'processOrder', orderData }),
       });
       const result = await response.json();
-      if (result.success) { setOrderComplete(true); setStep('confirm'); }
+      if (result.success) { setOrderComplete(true); setStep('msds'); }
       else { alert('주문 처리 중 오류가 발생했습니다: ' + result.message); setSubmitting(false); }
     } catch {
       setOrderComplete(true);
-      setStep('confirm');
+      setStep('msds');
     }
   };
 
@@ -396,6 +433,48 @@ export default function DCIOrderApp() {
     );
   }
 
+  // MSDS 다운로드 화면
+  if (step === 'msds') {
+    return (
+      <div style={styles.container}>
+        <div style={styles.authBox}>
+          <h1 style={styles.title}>주문이 접수되었습니다</h1>
+          <p style={{ ...styles.subtitle, marginBottom: '12px' }}>구매하신 제품의 MSDS 자료를 다운로드하실 수 있습니다</p>
+          <div style={styles.msdsDisclaimer}>
+            <p style={{ margin: '0 0 10px 0' }}>본 자료는 안전한 재료 취급을 위해 사용된 원료의 물리화학적 특성과 안전 정보를 제공하기 위한 자료입니다. 다만, 이 자료에 포함된 정보는 교육 목적으로만 활용되어야 하며, 상업적 목적의 제품 제조 및 판매는 엄격히 금지됩니다.</p>
+            <p style={{ margin: 0 }}>This document is to support student learning in safe material handling practices, we disclose the physical, chemical, and safety characteristics of the raw materials used in our formulations. However, all information contained in this material is strictly for educational purposes only. Any commercial use for product manufacturing or sales is strictly prohibited.</p>
+          </div>
+
+          {msdsItems.length > 0 && (
+            <div style={{ marginTop: '22px' }}>
+              <div style={styles.msdsHeader}>
+                <span style={{ fontSize: '12px', color: '#c4a0ad', textTransform: 'uppercase', letterSpacing: '0.5px' }}>MSDS 자료 다운로드</span>
+                <span style={{ fontSize: '11px', color: '#c4a0ad' }}>※ English only</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' }}>
+                {msdsItems.map(item => (
+                  <div key={item.msdsFile} style={styles.msdsRow}>
+                    <div style={styles.productInfo}>
+                      <div style={styles.productName}>{item.name}</div>
+                      <div style={styles.productSpec}>{item.msdsFile}</div>
+                    </div>
+                    <a href={`/msds/${item.msdsFile}.pdf`} target="_blank" rel="noreferrer" style={styles.msdsBtn}>
+                      PDF download
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <button style={{ ...styles.button, marginTop: '24px' }} onClick={() => setStep('confirm')}>
+            주문 완료 페이지로 이동
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   // 완료 화면
   return (
     <div style={styles.container}>
@@ -485,4 +564,8 @@ const styles = {
   kakaoBtn: { display: 'inline-block', padding: '8px 20px', background: '#c4a0ad', color: 'white', borderRadius: '20px', fontSize: '13px', fontWeight: '700', textDecoration: 'none', marginBottom: '12px' },
   contactInfo: { fontSize: '13px', color: '#b89aa2', margin: '4px 0' },
   contactHours: { fontSize: '12px', color: '#c4a0ad', margin: '4px 0' },
+  msdsDisclaimer: { fontSize: '11px', color: '#b89aa2', lineHeight: '1.7', background: '#fdf5f7', borderRadius: '8px', padding: '12px 14px' },
+  msdsHeader: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
+  msdsRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', border: '1px solid #f5e2e7', borderRadius: '8px' },
+  msdsBtn: { fontSize: '12px', padding: '6px 14px', borderRadius: '20px', background: '#f5f5f5', color: '#999', border: '1px solid #e0e0e0', cursor: 'pointer', whiteSpace: 'nowrap', textDecoration: 'none', display: 'inline-block' },
 };
