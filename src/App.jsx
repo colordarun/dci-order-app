@@ -291,11 +291,11 @@ export default function DCIOrderApp() {
         body: JSON.stringify({ action: 'processOrder', orderData }),
       });
       const result = await response.json();
-      if (result.success) { setOrderComplete(true); setStep('msds'); }
+      if (result.success) { setOrderComplete(true); setStep('confirm'); }
       else { alert('주문 처리 중 오류가 발생했습니다: ' + result.message); setSubmitting(false); }
     } catch {
       setOrderComplete(true);
-      setStep('msds');
+      setStep('confirm');
     }
   };
 
@@ -467,8 +467,11 @@ export default function DCIOrderApp() {
             </div>
           )}
 
-          <button style={{ ...styles.button, marginTop: '24px' }} onClick={() => setStep('confirm')}>
-            주문 완료 페이지로 이동
+          <button style={{ ...styles.button, marginTop: '24px' }} onClick={() => {
+            setStep('auth'); setAuthenticated(false); setCertNum(''); setInstructorName('');
+            setCart({}); setOrderForm({ email: '', phone: '', address: '', note: '' }); setOrderComplete(false);
+          }}>
+            새로운 주문
           </button>
         </div>
       </div>
@@ -503,11 +506,8 @@ export default function DCIOrderApp() {
           <p style={styles.accountName}>색다른컬러연구소</p>
           <p style={styles.accountNote}>배송은 입금 확인 후, 영업일 기준 2~3일 소요<br />Delivery: 2–3 business days after payment</p>
         </div>
-        <button style={styles.button} onClick={() => {
-          setStep('auth'); setAuthenticated(false); setCertNum(''); setInstructorName('');
-          setCart({}); setOrderForm({ email: '', phone: '', address: '', note: '' }); setOrderComplete(false);
-        }}>
-          새로운 주문
+        <button style={styles.msdsDownloadBtn} onClick={() => setStep('msds')}>
+          MSDS download
         </button>
       </div>
     </div>
@@ -568,4 +568,5 @@ const styles = {
   msdsHeader: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
   msdsRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', border: '1px solid #f5e2e7', borderRadius: '8px' },
   msdsBtn: { fontSize: '12px', padding: '6px 14px', borderRadius: '20px', background: '#f5f5f5', color: '#999', border: '1px solid #e0e0e0', cursor: 'pointer', whiteSpace: 'nowrap', textDecoration: 'none', display: 'inline-block' },
+  msdsDownloadBtn: { width: '100%', padding: '11px', background: 'white', color: '#b0b0b0', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '13px', fontWeight: '500', cursor: 'pointer', marginBottom: '10px' },
 };
