@@ -105,10 +105,12 @@ export default function DCIOrderApp() {
     loadInstructors();
   }, []);
 
+  const normalize = (str) => str.trim().replace(/\s+/g, ' ').toLowerCase();
+
   const handleAuth = () => {
     setAuthError('');
     const instructor = instructors.find(
-      (inst) => inst.id === certNum.trim() && inst.name === instructorName.trim()
+      (inst) => inst.id === certNum.trim() && normalize(inst.name) === normalize(instructorName)
     );
     if (instructor) {
       setCurrentInstructor(instructor);
@@ -198,13 +200,13 @@ export default function DCIOrderApp() {
           <p style={styles.subtitle}>수료번호와 강사명을 입력하세요</p>
           <div style={styles.formGroup}>
             <label style={styles.label}>수료번호</label>
-            <input type="text" placeholder="예: AAA-2026-000" value={certNum}
+            <input type="text" placeholder="예: ABC-0000-1234" value={certNum}
               onChange={(e) => setCertNum(formatCertNum(e.target.value))} style={styles.input}
               onKeyPress={(e) => e.key === 'Enter' && handleAuth()} />
           </div>
           <div style={styles.formGroup}>
             <label style={styles.label}>강사명</label>
-            <input type="text" placeholder="예: 홍길동" value={instructorName}
+            <input type="text" placeholder="예: 홍길동, Jung Jieun" value={instructorName}
               onChange={(e) => setInstructorName(e.target.value)} style={styles.input}
               onKeyPress={(e) => e.key === 'Enter' && handleAuth()} />
           </div>
@@ -212,6 +214,16 @@ export default function DCIOrderApp() {
           <button style={styles.button} onClick={handleAuth} disabled={loadingInstructors}>
             {loadingInstructors ? '로드 중...' : '인증'}
           </button>
+        </div>
+
+        <div style={styles.contactBox}>
+          <p style={styles.contactTitle}>기타 문의</p>
+          <a href="https://center-pf.kakao.com/_DNmxdj/chats" target="_blank" rel="noreferrer" style={styles.kakaoBtn}>
+            카카오채널 문의하기
+          </a>
+          <p style={styles.contactInfo}>colordarun@kakao.com</p>
+          <p style={styles.contactInfo}>02-2631-8805</p>
+          <p style={styles.contactHours}>Open 10am – 6pm</p>
         </div>
       </div>
     );
@@ -399,4 +411,9 @@ const styles = {
   summarySubtotal: { minWidth: '72px', textAlign: 'right', fontWeight: '600', color: '#965468' },
   totalDetails: { textAlign: 'right', marginBottom: '4px' },
   totalRow: { display: 'flex', justifyContent: 'flex-end', gap: '24px', fontSize: '14px', color: '#7a5a63', marginBottom: '6px' },
+  contactBox: { maxWidth: '480px', margin: '16px auto 0', textAlign: 'center', padding: '0 10px' },
+  contactTitle: { fontSize: '12px', fontWeight: '600', color: '#c4a0ad', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '0.8px' },
+  kakaoBtn: { display: 'inline-block', padding: '8px 20px', background: '#FAE100', color: '#3C1E1E', borderRadius: '20px', fontSize: '13px', fontWeight: '700', textDecoration: 'none', marginBottom: '12px' },
+  contactInfo: { fontSize: '13px', color: '#b89aa2', margin: '4px 0' },
+  contactHours: { fontSize: '12px', color: '#c4a0ad', margin: '4px 0' },
 };
