@@ -412,7 +412,7 @@ const styles = {
   totalRow: { display: 'flex', justifyContent: 'flex-end', gap: '24px', fontSize: '14px', color: '#7a5a63', marginBottom: '6px' },
   contactBox: { maxWidth: '480px', margin: '16px auto 0', textAlign: 'center', padding: '0 10px' },
   contactTitle: { fontSize: '12px', fontWeight: '600', color: '#c4a0ad', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '0.8px' },
-  kakaoBtn: { display: 'inline-block', padding: '8px 20px', background: '#965468', color: 'white', borderRadius: '20px', fontSize: '13px', fontWeight: '700', textDecoration: 'none', marginBottom: '12px' },
+  kakaoBtn: { display: 'inline-block', padding: '8px 20px', background: '#b89aa2', color: 'white', borderRadius: '20px', fontSize: '13px', fontWeight: '700', textDecoration: 'none', marginBottom: '12px' },
   contactInfo: { fontSize: '13px', color: '#b89aa2', margin: '4px 0' },
   contactHours: { fontSize: '12px', color: '#c4a0ad', margin: '4px 0' },
 };
