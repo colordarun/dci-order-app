@@ -106,7 +106,12 @@ function formatCertNum(raw) {
       break;
     }
   }
-  if (!prefix) return raw; // 미등록 과정코드는 포맷 불가
+  // 미등록 과정코드는 알파벳 prefix로 폴백
+  if (!prefix) {
+    var m = raw.match(/^([A-Z]+)/);
+    prefix = m ? m[1] : '';
+  }
+  if (!prefix) return raw;
 
   var digits = raw.slice(prefix.length);
   if (!/^[0-9]*$/.test(digits)) return raw;
@@ -199,11 +204,11 @@ export default function DCIOrderApp() {
     ...PRODUCTS.bottles,
   ];
 
-  // 과정별 허용 코드 기반 필터
-  const allowedCodes = currentInstructor
-    ? (COURSE_PRODUCTS[getCoursePrefix(currentInstructor.id)] || [])
-    : [];
-  const filterItems = (items) => items.filter((p) => allowedCodes.includes(p.code));
+  // 과정별 허용 코드 기반 필터 (미등록 과정코드 = admin → 전체 노출)
+  const coursePrefix = currentInstructor ? getCoursePrefix(currentInstructor.id) : null;
+  const isAdmin = coursePrefix && !(coursePrefix in COURSE_PRODUCTS);
+  const allowedCodes = isAdmin ? null : (currentInstructor ? (COURSE_PRODUCTS[coursePrefix] || []) : []);
+  const filterItems = (items) => isAdmin ? items : items.filter((p) => allowedCodes.includes(p.code));
 
   const calculateTotal = () =>
     Object.entries(cart).reduce((total, [code, qty]) => {
