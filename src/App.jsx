@@ -95,20 +95,26 @@ function formatPhone(raw) {
 
 function formatCertNum(raw) {
   raw = raw.toUpperCase().replace(/[^A-Z0-9]/g, '');
-  var prefixEnd = 0;
-  for (var i = 1; i <= raw.length - 4; i++) {
-    // 연도는 항상 20XX 형태 → 알파벳+숫자 혼합 prefix(CCM1 등) 오인식 방지
-    if (/^20[2-9][0-9]$/.test(raw.slice(i, i + 4))) {
-      prefixEnd = i;
+  if (!raw) return raw;
+
+  // 알려진 과정 prefix만 허용 (긴 것부터 매칭)
+  var knownPrefixes = Object.keys(COURSE_PRODUCTS).sort(function(a, b) { return b.length - a.length; });
+  var prefix = '';
+  for (var p = 0; p < knownPrefixes.length; p++) {
+    if (raw.indexOf(knownPrefixes[p]) === 0) {
+      prefix = knownPrefixes[p];
       break;
     }
   }
-  if (prefixEnd === 0) return raw;
-  var prefix = raw.slice(0, prefixEnd);
-  var rest = raw.slice(prefixEnd);
-  var year = rest.slice(0, 4);
-  var seq = rest.slice(4, 7);
-  if (seq.length > 0) return prefix + '-' + year + '-' + seq;
+  if (!prefix) return raw; // 미등록 과정코드는 포맷 불가
+
+  var digits = raw.slice(prefix.length);
+  if (!/^[0-9]*$/.test(digits)) return raw;
+
+  // PREFIX-0000-000 (숫자 7자리)
+  var year = digits.slice(0, 4);
+  var seq  = digits.slice(4, 7);
+  if (seq.length  > 0) return prefix + '-' + year + '-' + seq;
   if (year.length > 0) return prefix + '-' + year;
   return prefix;
 }
