@@ -97,7 +97,8 @@ function formatCertNum(raw) {
   raw = raw.toUpperCase().replace(/[^A-Z0-9]/g, '');
   var prefixEnd = 0;
   for (var i = 1; i <= raw.length - 4; i++) {
-    if (/^[0-9]{4}$/.test(raw.slice(i, i + 4))) {
+    // 연도는 항상 20XX 형태 → 알파벳+숫자 혼합 prefix(CCM1 등) 오인식 방지
+    if (/^20[2-9][0-9]$/.test(raw.slice(i, i + 4))) {
       prefixEnd = i;
       break;
     }
