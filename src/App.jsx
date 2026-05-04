@@ -221,8 +221,8 @@ export default function DCIOrderApp() {
           <a href="https://center-pf.kakao.com/_DNmxdj/chats" target="_blank" rel="noreferrer" style={styles.kakaoBtn}>
             카카오채널 문의하기
           </a>
-          <p style={styles.contactInfo}>colordarun@kakao.com</p>
-          <p style={styles.contactInfo}>02-2631-8805</p>
+          <p style={styles.contactInfo}>Email: colordarun@kakao.com</p>
+          <p style={styles.contactInfo}>Tel: 02-2631-8805</p>
           <p style={styles.contactHours}>Open 10am – 6pm</p>
         </div>
       </div>
