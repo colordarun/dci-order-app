@@ -504,7 +504,7 @@ export default function DCIOrderApp() {
           <p style={styles.accountLabel}>입금 계좌 정보 / Bank Account</p>
           <p style={styles.accountBank}>국민은행 / Kookmin Bank&nbsp;&nbsp;000-888-0088</p>
           <p style={styles.accountName}>색다른컬러연구소</p>
-          <p style={styles.accountNote}>배송은 입금 확인 후, 영업일 기준 2~3일 소요<br />Delivery: 2–3 business days after payment</p>
+          <p style={styles.accountNote}>배송은 입금 확인 후, 영업일 기준 2~3일 소요<br />Delivery: 3–5 business days after payment</p>
         </div>
         <button style={styles.msdsDownloadBtn} onClick={() => setStep('msds')}>
           MSDS download
