@@ -3,37 +3,78 @@ import React, { useState, useEffect } from 'react';
 // Google Apps Script 배포 URL
 const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxAv-J8yX3Fll8OWgfTfrcgBsQlcZxrF8XpwNrr34Q1NIKO8ZEaTA3_s8cUIX8LtKD0/exec';
 
-// 상품 데이터 (restricted: true → KFD/KLC 수료번호에 비노출)
+// 상품 데이터 (3단가: priceL / priceS / priceDefault)
 const PRODUCTS = {
   pigments: [
-    { code: 'PIG-Z.BR',  name: 'Z브라운 색소 / Z-Brown',               spec: '10g',          price: 7000 },
-    { code: 'PWD-Z.BR',  name: 'Z브라운 색소 분말 / Z-Brown Powder',    spec: '10g, 분말',    price: 9000 },
-    { code: 'PIG-X.RD',  name: 'X레드 색소 / X-Red',                   spec: '10g',          price: 5000 },
-    { code: 'PIG-Z.RD',  name: 'Z레드 색소 / Z-Red',                   spec: '10g, 립 전용', price: 9000 },
-    { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                  spec: '10g',          price: 5000 },
-    { code: 'PIG-WT',    name: '화이트 색소 / White',                   spec: '10g',          price: 4500 },
-    { code: 'PIG-WT.2',  name: '화이트 색소 2개 묶음 / White ×2 Set',  spec: '10g×2',        price: 8000 },
-    { code: 'PIG-VT',    name: '바이올렛 색소 / Violet',                spec: '10g',          price: 6000 },
-    { code: 'PIG-BK',    name: '블랙 색소 / Black',                     spec: '5g',           price: 3000 },
-    { code: 'PIG-BL',    name: '블루 색소 / Blue',                      spec: '5g',           price: 3000,  restricted: true },
-    { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                  spec: '10g, 립 전용', price: 5000,  restricted: true },
-    { code: 'PIG-MG',    name: '마젠타 색소 / Magenta',                 spec: '10g, 립 전용', price: 5000,  restricted: true },
+    { code: 'PIG-Z.BR',  name: 'Z브라운 색소 / Z-Brown',              spec: '10g',              priceL: 7000,   priceS: 7700,   priceDefault: 8400 },
+    { code: 'PWD-Z.BR',  name: 'Z브라운 색소 분말 / Z-Brown Powder',   spec: '10g, 분말',        priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
+    { code: 'PIG-X.RD',  name: 'X레드 색소 / X-Red',                  spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000 },
+    { code: 'PIG-Z.RD',  name: 'Z레드 색소 / Z-Red',                  spec: '10g, for Lips',    priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
+    { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                 spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000 },
+    { code: 'PIG-WT',    name: '화이트 색소 / White',                  spec: '10g',              priceL: 4500,   priceS: 4900,   priceDefault: 5400 },
+    { code: 'PIG-WT.2',  name: '화이트 색소 2개 묶음 / White ×2 Set', spec: '10g×2',            priceL: 8000,   priceS: 8800,   priceDefault: 9600 },
+    { code: 'PIG-BL',    name: '블루 색소 / Blue',                     spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600 },
+    { code: 'PIG-BK',    name: '블랙 색소 / Black',                    spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600 },
+    { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                 spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000 },
+    { code: 'PIG-MG',    name: '마젠타 색소 / Magenta',                spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000 },
+    { code: 'PIG-VT',    name: '바이올렛 색소 / Violet',               spec: '10g',              priceL: 6000,   priceS: 6600,   priceDefault: 7200 },
   ],
   binders: [
-    { code: 'BND-FND',   name: '파운데이션 바인더 / Foundation Binder',             spec: '100g',      price: 23000 },
-    { code: 'BND-FND.L', name: '파운데이션 바인더 대용량 / Foundation Binder (1kg)', spec: '1kg',       price: 200000 },
-    { code: 'PWD-MAT',   name: '매트 파우더 / Matte Powder',                        spec: '100g, 분말', price: 15000, restricted: true },
-    { code: 'BND-LIP',   name: '립글로스 바인더 / Lip Gloss Binder',                spec: '50g',       price: 3000,  restricted: true },
+    { code: 'BND-FND100', name: '파운데이션 바인더 / Foundation Binder',              spec: '100g',            priceL: 23000,  priceS: 25300,  priceDefault: 27600 },
+    { code: 'BND-FND1k',  name: '파운데이션 바인더 대용량 / Foundation Binder (1kg)', spec: '1kg',             priceL: 200000, priceS: 220000, priceDefault: 240000 },
+    { code: 'PWD-MAT',    name: '매트 파우더 / Matte Powder',                         spec: '100g, 분말',      priceL: 15000,  priceS: 16500,  priceDefault: 18000 },
+    { code: 'BND-LIP1',   name: '립글로스 바인더 / Lip Gloss Binder',                 spec: '50ml',            priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
+    { code: 'BND-LIP5',   name: '립글로스 바인더 대용량 / Lip Gloss Binder (250ml)',   spec: '250ml, 5개 묶음', priceL: 34000,  priceS: 37400,  priceDefault: 40800 },
   ],
   cards: [
-    { code: 'CARD-SK5',   name: '진단카드(스킨용)*5 / Skin Diagnostic Card *5',              spec: '5개 묶음',  price: 10000 },
-    { code: 'CARD-SK',    name: '진단카드(스킨용)*10 / Skin Diagnostic Card *10',             spec: '10개 묶음', price: 15000 },
-    { code: 'CARD-LP5',   name: '진단카드(립용)*5 / Lip Diagnostic Card *5',                 spec: '5개 묶음',  price: 10000, restricted: true },
-    { code: 'CARD-LP',    name: '진단카드(립용)*10 / Lip Diagnostic Card *10',                spec: '10개 묶음', price: 15000, restricted: true },
-    { code: 'CARD-LC5',   name: '진단카드(립앤치크용)*5 / Lip & Cheek Diagnostic Card *5',   spec: '5개 묶음',  price: 10000 },
-    { code: 'CARD-LC',    name: '진단카드(립앤치크용)*10 / Lip & Cheek Diagnostic Card *10',  spec: '10개 묶음', price: 15000 },
-    { code: 'STCKR-SK5',  name: '진단스티커(스킨용)*5 / Skin Diagnostic Sticker *5',         spec: '5개 묶음',  price: 20000, restricted: true },
-    { code: 'STCKR-SK',   name: '진단스티커(스킨용)*10 / Skin Diagnostic Sticker *10',        spec: '10개 묶음', price: 30000, restricted: true },
+    { code: 'CARD-SK5',   name: '진단카드(스킨용)*5 / Skin Diagnostic Card *5',              spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
+    { code: 'CARD-SK10',  name: '진단카드(스킨용)*10 / Skin Diagnostic Card *10',             spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
+    { code: 'CARD-LP5',   name: '진단카드(립용)*5 / Lip Diagnostic Card *5',                 spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
+    { code: 'CARD-LP10',  name: '진단카드(립용)*10 / Lip Diagnostic Card *10',               spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
+    { code: 'CARD-LC5',   name: '진단카드(립앤치크용)*5 / Lip & Cheek Diagnostic Card *5',   spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
+    { code: 'CARD-LC10',  name: '진단카드(립앤치크용)*10 / Lip & Cheek Diagnostic Card *10', spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
+    { code: 'STCKR-SK5',  name: '진단스티커(스킨용)*5 / Skin Diagnostic Sticker *5',         spec: '5개 묶음',  priceL: 20000, priceS: 22000, priceDefault: 24000 },
+    { code: 'STCKR-SK10', name: '진단스티커(스킨용)*10 / Skin Diagnostic Sticker *10',       spec: '10개 묶음', priceL: 30000, priceS: 33000, priceDefault: 36000 },
+  ],
+  bottles: [
+    { code: 'BTL-FDN', name: '파운데이션 용기 / Foundation Container', spec: '20ml', priceL: 2000, priceS: 2200, priceDefault: 2400 },
+    { code: 'BTL-LGS', name: '립글로스 용기 / Lip Gloss Container',    spec: '5ml',  priceL: 1200, priceS: 1320, priceDefault: 1440 },
+  ],
+};
+
+// 과정별 주문 가능 제품 코드 (수료번호 첫 segment 기준)
+const COURSE_PRODUCTS = {
+  CCM1: [
+    'PIG-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL', 'PIG-WT',
+    'PIG-BL', 'PIG-BK', 'PIG-OR', 'PIG-MG', 'PIG-VT',
+    'BND-FND100', 'BND-LIP1',
+    'CARD-SK5', 'CARD-LP5',
+    'BTL-FDN', 'BTL-LGS',
+  ],
+  SFDI: [
+    'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
+    'PIG-BL', 'PIG-BK',
+    'BND-FND100', 'BND-FND1k', 'PWD-MAT',
+    'CARD-SK5', 'CARD-SK10', 'STCKR-SK5', 'STCKR-SK10',
+    'BTL-FDN',
+  ],
+  KFDI: [
+    'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
+    'BND-FND100', 'BND-FND1k',
+    'CARD-SK5', 'CARD-SK10',
+    'BTL-FDN',
+  ],
+  KLCI: [
+    'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
+    'PIG-BK', 'PIG-VT',
+    'CARD-LC5', 'CARD-LC10',
+  ],
+  SLGI: [
+    'PIG-X.RD', 'PIG-Z.RD', 'PIG-WT', 'PIG-WT.2',
+    'PIG-BK', 'PIG-OR', 'PIG-MG',
+    'BND-LIP1', 'BND-LIP5',
+    'CARD-LP5', 'CARD-LP10',
+    'BTL-LGS',
   ],
 };
 
@@ -133,17 +174,34 @@ export default function DCIOrderApp() {
     }
   };
 
-  const allProducts = [...PRODUCTS.pigments, ...PRODUCTS.binders, ...PRODUCTS.cards];
+  // 수료번호 첫 segment(첫 번째 '-' 앞)로 과정 prefix 추출
+  const getCoursePrefix = (id) => id.split('-')[0];
 
-  // KFD 또는 KLC로 시작하는 수료번호는 restricted 제품 비노출
-  const isKFDorKLC = currentInstructor &&
-    (currentInstructor.id.startsWith('KFD') || currentInstructor.id.startsWith('KLC'));
-  const filterItems = (items) => isKFDorKLC ? items.filter(p => !p.restricted) : items;
+  // 강사 등급(tier) 기반 단가 반환
+  const getPrice = (product) => {
+    const tier = currentInstructor?.tier;
+    if (tier === 'L') return product.priceL;
+    if (tier === 'S') return product.priceS;
+    return product.priceDefault;
+  };
+
+  const allProducts = [
+    ...PRODUCTS.pigments,
+    ...PRODUCTS.binders,
+    ...PRODUCTS.cards,
+    ...PRODUCTS.bottles,
+  ];
+
+  // 과정별 허용 코드 기반 필터
+  const allowedCodes = currentInstructor
+    ? (COURSE_PRODUCTS[getCoursePrefix(currentInstructor.id)] || [])
+    : [];
+  const filterItems = (items) => items.filter((p) => allowedCodes.includes(p.code));
 
   const calculateTotal = () =>
     Object.entries(cart).reduce((total, [code, qty]) => {
       const product = allProducts.find((p) => p.code === code);
-      return total + (product ? product.price * qty : 0);
+      return total + (product ? getPrice(product) * qty : 0);
     }, 0);
 
   const SHIPPING_FEE = 3000;
@@ -153,7 +211,8 @@ export default function DCIOrderApp() {
     .filter(([, qty]) => qty > 0)
     .map(([code, qty]) => {
       const product = allProducts.find((p) => p.code === code);
-      return { ...product, quantity: qty, subtotal: product.price * qty };
+      const price = getPrice(product);
+      return { ...product, quantity: qty, price, subtotal: price * qty };
     });
 
   const handleSubmitOrder = async () => {
@@ -200,7 +259,7 @@ export default function DCIOrderApp() {
           <p style={styles.subtitle}>수료번호와 강사명을 입력하세요</p>
           <div style={styles.formGroup}>
             <label style={styles.label}>수료번호</label>
-            <input type="text" placeholder="예: ABC-0000-1234" value={certNum}
+            <input type="text" placeholder="예: CCM1-2026-001" value={certNum}
               onChange={(e) => setCertNum(formatCertNum(e.target.value))} style={styles.input}
               onKeyPress={(e) => e.key === 'Enter' && handleAuth()} />
           </div>
@@ -239,9 +298,10 @@ export default function DCIOrderApp() {
           </div>
 
           {[
-            { title: '색소류 (Pigment)', items: PRODUCTS.pigments },
-            { title: '바인더류 (Binder)', items: PRODUCTS.binders },
-            { title: '진단키트 (Diagnostic Kit)', items: PRODUCTS.cards },
+            { title: '색소류 (Pigment)',          items: PRODUCTS.pigments },
+            { title: '바인더류 (Binder)',           items: PRODUCTS.binders },
+            { title: '진단키트 (Diagnostic Kit)',   items: PRODUCTS.cards },
+            { title: '용기류 (Container)',          items: PRODUCTS.bottles },
           ].map(({ title, items }) => {
             const visibleItems = filterItems(items);
             if (visibleItems.length === 0) return null;
@@ -255,7 +315,7 @@ export default function DCIOrderApp() {
                         <div style={styles.productName}>{product.name}</div>
                         <div style={styles.productSpec}>{product.spec}</div>
                       </div>
-                      <div style={styles.productPrice}>{product.price.toLocaleString()}원</div>
+                      <div style={styles.productPrice}>{getPrice(product).toLocaleString()}원</div>
                       <input type="number" min="0" value={cart[product.code] || 0}
                         onChange={(e) => handleQuantityChange(product.code, parseInt(e.target.value) || 0)}
                         style={styles.quantityInput} />
@@ -292,7 +352,6 @@ export default function DCIOrderApp() {
           </div>
 
           <div style={styles.footer}>
-            {/* 주문 내역 요약 */}
             {cartItems.length > 0 && (
               <div style={styles.orderSummary}>
                 <div style={styles.summaryTitle}>주문 내역</div>
@@ -308,7 +367,6 @@ export default function DCIOrderApp() {
               </div>
             )}
 
-            {/* 금액 합계 */}
             <div style={styles.totalDetails}>
               <div style={styles.totalRow}><span>상품 총액</span><span>{calculateTotal().toLocaleString()}원</span></div>
               <div style={styles.totalRow}><span>배송비</span><span>+{SHIPPING_FEE.toLocaleString()}원</span></div>
