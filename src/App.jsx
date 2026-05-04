@@ -438,7 +438,7 @@ export default function DCIOrderApp() {
     return (
       <div style={styles.container}>
         <div style={styles.authBox}>
-          <h1 style={styles.title}>주문이 접수되었습니다</h1>
+          <h1 style={styles.title}>교육용 MSDS 제공</h1>
           <p style={{ ...styles.subtitle, marginBottom: '12px' }}>구매하신 제품의 MSDS 자료를 다운로드하실 수 있습니다</p>
           <div style={styles.msdsDisclaimer}>
             <p style={{ margin: '0 0 10px 0' }}>본 자료는 안전한 재료 취급을 위해 사용된 원료의 물리화학적 특성과 안전 정보를 제공하기 위한 자료입니다. 다만, 이 자료에 포함된 정보는 교육 목적으로만 활용되어야 하며, 상업적 목적의 제품 제조 및 판매는 엄격히 금지됩니다.</p>
@@ -467,12 +467,6 @@ export default function DCIOrderApp() {
             </div>
           )}
 
-          <button style={{ ...styles.button, marginTop: '24px' }} onClick={() => {
-            setStep('auth'); setAuthenticated(false); setCertNum(''); setInstructorName('');
-            setCart({}); setOrderForm({ email: '', phone: '', address: '', note: '' }); setOrderComplete(false);
-          }}>
-            새로운 주문
-          </button>
         </div>
       </div>
     );
@@ -507,7 +501,7 @@ export default function DCIOrderApp() {
           <p style={styles.accountNote}>배송은 입금 확인 후, 영업일 기준 2~3일 소요<br />Delivery: 3–5 business days after payment</p>
         </div>
         <button style={styles.msdsDownloadBtn} onClick={() => setStep('msds')}>
-          MSDS download
+          물질안전보건자료 다운로드
         </button>
       </div>
     </div>
@@ -567,6 +561,6 @@ const styles = {
   msdsDisclaimer: { fontSize: '11px', color: '#b89aa2', lineHeight: '1.7', background: '#fdf5f7', borderRadius: '8px', padding: '12px 14px' },
   msdsHeader: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
   msdsRow: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', border: '1px solid #f5e2e7', borderRadius: '8px' },
-  msdsBtn: { fontSize: '12px', padding: '6px 14px', borderRadius: '20px', background: '#f5f5f5', color: '#999', border: '1px solid #e0e0e0', cursor: 'pointer', whiteSpace: 'nowrap', textDecoration: 'none', display: 'inline-block' },
-  msdsDownloadBtn: { width: '100%', padding: '11px', background: 'white', color: '#b0b0b0', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '13px', fontWeight: '500', cursor: 'pointer', marginBottom: '10px' },
+  msdsBtn: { fontSize: '12px', padding: '6px 14px', borderRadius: '20px', background: '#bababa', color: '#ffffff', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap', textDecoration: 'none', display: 'inline-block' },
+  msdsDownloadBtn: { width: '100%', padding: '11px', background: '#bababa', color: '#ffffff', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: '500', cursor: 'pointer', marginBottom: '10px' },
 };
