@@ -487,7 +487,7 @@ export default function DCIOrderApp() {
           </div>
           <div style={styles.amountRow}>
             <span>배송비 / Shipping</span>
-            <span>3,000원</span>
+            <span>3,500원</span>
           </div>
           <div style={{ ...styles.amountRow, borderTop: '1px solid #ddd', paddingTop: '10px', marginTop: '6px', fontWeight: '700', color: '#2c3e50' }}>
             <span>총액 / Total</span>
@@ -498,7 +498,7 @@ export default function DCIOrderApp() {
           <p style={styles.accountLabel}>입금 계좌 정보 / Bank Account</p>
           <p style={styles.accountBank}>국민은행 / Kookmin Bank&nbsp;&nbsp;000-888-0088</p>
           <p style={styles.accountName}>색다른컬러연구소</p>
-          <p style={styles.accountNote}>배송은 입금 확인 후, 영업일 기준 2~3일 소요<br />Delivery: 3–5 business days after payment</p>
+          <p style={styles.accountNote}>배송은 입금 확인 후, 영업일 기준 3~5일 소요<br />Delivery: 3–5 business days after payment</p>
         </div>
         <button style={styles.msdsDownloadBtn} onClick={() => setStep('msds')}>
           물질안전보건자료 다운로드
