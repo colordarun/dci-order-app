@@ -239,7 +239,7 @@ export default function DCIOrderApp() {
       return total + (product ? getPrice(product) * qty : 0);
     }, 0);
 
-  const SHIPPING_FEE = 3000;
+  const SHIPPING_FEE = 3500;
   const getTotalWithShipping = () => calculateTotal() + SHIPPING_FEE;
 
   const cartItems = Object.entries(cart)
