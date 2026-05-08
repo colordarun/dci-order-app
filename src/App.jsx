@@ -37,8 +37,8 @@ const PRODUCTS = {
     { code: 'STCKR-SK10', name: '스킨용 진단 스티커*10 / Skin Diagnostic Sticker *10',       spec: '10개 묶음', priceL: 30000, priceS: 33000, priceDefault: 36000 },
   ],
   bottles: [
-    { code: 'BTL-FDN', name: '파운데이션 용기 / Foundation Container', spec: '20ml(펌프형)', priceL: 2000, priceS: 2200, priceDefault: 2400 },
-    { code: 'BTL-LGS', name: '립글로스 용기 / Lip Gloss Container',    spec: '5ml',  priceL: 1200, priceS: 1320, priceDefault: 1440 },
+    { code: 'BTL-FDN', name: '파운데이션 용기 / Foundation Container', spec: '30g(펌프형)', priceL: 2200, priceS: 2700, priceDefault: 3000 },
+    { code: 'BTL-LGS', name: '립글로스 용기 / Lip Gloss Container',    spec: '5ml',        priceL: 1200, priceS: 1600, priceDefault: 2000 },
   ],
 };
 
