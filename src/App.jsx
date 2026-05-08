@@ -6,18 +6,18 @@ const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxAv-J8y
 // 상품 데이터 (3단가: priceL / priceS / priceDefault)
 const PRODUCTS = {
   pigments: [
-    { code: 'PIG-Z.BR',  name: 'Z브라운 색소 / Z-Brown',              spec: '10g',              priceL: 7000,   priceS: 7700,   priceDefault: 8400 },
-    { code: 'PWD-Z.BR',  name: 'Z브라운 색소 분말 / Z-Brown Powder',   spec: '10g, 분말',        priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
-    { code: 'PIG-X.RD',  name: 'X레드 색소 / X-Red',                  spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000 },
-    { code: 'PIG-Z.RD',  name: 'Z레드 색소 / Z-Red',                  spec: '10g, for Lips',    priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
-    { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                 spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000 },
-    { code: 'PIG-WT',    name: '화이트 색소 / White',                  spec: '10g',              priceL: 4500,   priceS: 4900,   priceDefault: 5400 },
-    { code: 'PIG-WT.2',  name: '화이트 색소 2개 묶음 / White ×2 Set', spec: '10g×2',            priceL: 8000,   priceS: 8800,   priceDefault: 9600 },
-    { code: 'PIG-BL',    name: '블루 색소 / Blue',                     spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600 },
-    { code: 'PIG-BK',    name: '블랙 색소 / Black',                    spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600 },
-    { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                 spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000 },
-    { code: 'PIG-MG',    name: '마젠타 색소 / Magenta',                spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000 },
-    { code: 'PIG-VT',    name: '바이올렛 색소 / Violet',               spec: '10g',              priceL: 6000,   priceS: 6600,   priceDefault: 7200 },
+    { code: 'PIG-Z.BR',  name: 'Z브라운 색소 / Z-Brown',                    spec: '10g',              priceL: 7000,   priceS: 7700,   priceDefault: 8400,  color: '#6B3A2A', shape: 'circle' },
+    { code: 'PWD-Z.BR',  name: 'Z브라운 색소 분말 / Z-Brown Powder',         spec: '10g, 분말',        priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#6B3A2A', shape: 'square' },
+    { code: 'PIG-X.RD',  name: '옥스레드 / Ox-Red',                          spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#8a3221', shape: 'circle' },
+    { code: 'PIG-Z.RD',  name: '재은레드(standard) / Z-Red',                 spec: '10g, for Lips',    priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#B82020', shape: 'circle' },
+    { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                        spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#D4A800', shape: 'circle' },
+    { code: 'PIG-WT',    name: '화이트 색소 / White',                         spec: '10g',              priceL: 4500,   priceS: 4900,   priceDefault: 5400,  color: '#F0EDE8', shape: 'circle' },
+    { code: 'PIG-WT.2',  name: '화이트 색소 2개 묶음 / White ×2 Set',        spec: '10g×2',            priceL: 8000,   priceS: 8800,   priceDefault: 9600,  color: '#F0EDE8', shape: 'circle' },
+    { code: 'PIG-BL',    name: '블루 색소 / Blue',                            spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600,  color: '#274EA6', shape: 'circle' },
+    { code: 'PIG-BK',    name: '블랙 색소 / Black',                           spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600,  color: '#1E1E1E', shape: 'circle' },
+    { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                        spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#D96820', shape: 'circle' },
+    { code: 'PIG-MG',    name: '마젠타 색소 / Magenta',                       spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#e30e87', shape: 'circle' },
+    { code: 'PIG-VT',    name: '바이올렛 색소 / Violet',                      spec: '10g',              priceL: 6000,   priceS: 6600,   priceDefault: 7200,  color: '#6A3D9A', shape: 'circle' },
   ],
   binders: [
     { code: 'BND-FND100', name: '파운데이션 바인더 / Foundation Binder',              spec: '100g',            priceL: 23000,  priceS: 25300,  priceDefault: 27600 },
@@ -360,6 +360,15 @@ export default function DCIOrderApp() {
                 <div style={styles.categoryBody}>
                   {visibleItems.map((product) => (
                     <div key={product.code} style={styles.productRow}>
+                      {product.color && (
+                        <div style={{
+                          width: '22px', height: '22px', flexShrink: 0,
+                          borderRadius: product.shape === 'square' ? '5px' : '50%',
+                          background: product.color,
+                          border: '1px solid rgba(0,0,0,0.12)',
+                          marginRight: '10px',
+                        }} />
+                      )}
                       <div style={styles.productInfo}>
                         <div style={styles.productName}>{product.name}</div>
                         <div style={styles.productSpec}>{product.spec}</div>
