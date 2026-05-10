@@ -6,9 +6,9 @@ const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxAv-J8y
 // 상품 데이터 (3단가: priceL / priceS / priceDefault)
 const PRODUCTS = {
   pigments: [
-    { code: 'PIG-Z.BR',  name: 'Z브라운 색소 / Z-Brown',                    spec: '10g',              priceL: 7000,   priceS: 7700,   priceDefault: 8400,  color: '#9e5c3f', shape: 'circle' },
-    { code: 'PWD-Z.BR',  name: 'Z브라운 색소 분말 / Z-Brown Powder',         spec: '10g, 분말',        priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#9e5c3f', shape: 'square' },
-    { code: 'PIG-Z.RD',  name: 'Z레드(재은레드) / Z-Red',                    spec: '10g, for Lips',    priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#f50707', shape: 'circle' },
+    { code: 'PIG-Z.BR',  name: 'YUZEN-브라운 색소 / Z-Brown',                    spec: '10g',              priceL: 7000,   priceS: 7700,   priceDefault: 8400,  color: '#9e5c3f', shape: 'circle' },
+    { code: 'PWD-Z.BR',  name: 'YUZEN-브라운 색소 분말 / Z-Brown Powder',         spec: '10g, 분말',        priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#9e5c3f', shape: 'square' },
+    { code: 'PIG-Z.RD',  name: 'YUZEN-레드 / Z-Red',                    spec: '10g, for Lips',    priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#f50707', shape: 'circle' },
     { code: 'PIG-X.RD',  name: '레드 / X-Red',                              spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#a11515', shape: 'circle' },
     { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                        spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#ff6f00', shape: 'circle' },
     { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                        spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#D4A800', shape: 'circle' },
