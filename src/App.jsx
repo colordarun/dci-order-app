@@ -10,6 +10,7 @@ const PRODUCTS = {
     { code: 'PWD-Z.BR',  name: 'YUZEN-브라운 색소 분말 / Z-Brown Powder',         spec: '10g, 분말',        priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#9e5c3f', shape: 'square' },
     { code: 'PIG-Z.RD',  name: 'YUZEN-레드 / Z-Red',                    spec: '10g, for Lips',    priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#f50707', shape: 'circle' },
     { code: 'PIG-X.RD',  name: '레드 / X-Red',                              spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#a11515', shape: 'circle' },
+    { code: 'PIG-BRD',   name: '브릭레드 색소 / Brick Red',                  spec: '10g',              priceL: 6000,   priceS: 6600,   priceDefault: 7200,  color: '#bd4c42', shape: 'circle' },
     { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                        spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#ff6f00', shape: 'circle' },
     { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                        spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#D4A800', shape: 'circle' },
     { code: 'PIG-MG',    name: '마젠타 색소 / Magenta',                       spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#e30e87', shape: 'circle' },
@@ -45,14 +46,20 @@ const PRODUCTS = {
 // 과정별 주문 가능 제품 코드 (수료번호 첫 segment 기준)
 const COURSE_PRODUCTS = {
   CCM1: [
-    'PIG-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL', 'PIG-WT',
+    'PIG-Z.BR', 'PIG-X.RD', 'PIG-BRD', 'PIG-Z.RD', 'PIG-YL', 'PIG-WT',
     'PIG-BL', 'PIG-BK', 'PIG-OR', 'PIG-MG', 'PIG-VT',
     'BND-FND100', 'BND-LIP1',
     'CARD-SK5', 'CARD-LP5',
     'BTL-FDN', 'BTL-LGS',
   ],
+  AAA: [
+    'PIG-BRD',
+  ],
+  SSS: [
+    'PIG-BRD',
+  ],
   SFDI: [
-    'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
+    'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-BRD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
     'PIG-BL', 'PIG-BK',
     'BND-FND100', 'BND-FND1k', 'PWD-MAT',
     'CARD-SK5', 'CARD-SK10', 'STCKR-SK5', 'STCKR-SK10',
