@@ -86,7 +86,8 @@ const MSDS_MAP = {
   'PIG-Z.BR':   'PIG-Z.BR_msds',
   'PWD-Z.BR':   'PWD-Z.BR_msds',
   'PIG-X.RD':   'PIG-X.RD_msds',
-  'PIG-Z.RD':   'PIG-Z.RD_msds',
+  'PIG-Z.RD': 'PIG-Z.RD_msds',
+  'PIG-BRD':  'PIG-X.RD_msds',     //공용
   'PIG-YL':     'PIG-YL_msds',
   'PIG-WT':     'PIG-WT_msds',
   'PIG-WT.2':   'PIG-WT_msds',     // 공용
