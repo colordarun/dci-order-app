@@ -6,15 +6,14 @@ const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxAv-J8y
 // 상품 데이터 (3단가: priceL / priceS / priceDefault)
 const PRODUCTS = {
   pigments: [
-    { code: 'PIG-Z.BR',  name: 'YUZEN-브라운 색소 / Z-Brown',                    spec: '10g',              priceL: 7000,   priceS: 7700,   priceDefault: 8400,  color: '#9e5c3f', shape: 'circle' },
-    { code: 'PWD-Z.BR',  name: 'YUZEN-브라운 색소 분말 / Z-Brown Powder',         spec: '10g, 분말',        priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#9e5c3f', shape: 'square' },
-    { code: 'PIG-Z.RD',  name: 'YUZEN-레드 / Z-Red',                          spec: '10g, for Lips',        priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#f50707', shape: 'circle' },
-    { code: 'PIG-X.RD',  name: 'X-레드 / X-Red',                                spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#a11515', shape: 'circle' },
-    { code: 'PIG-BRD',   name: '브릭레드 / Brick Red',                        spec: '10g, 액상',        priceL: 7000,   priceS: 7700,   priceDefault: 8400, color: '#bd4c42', shape: 'circle' },
-    { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                        spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#ff6f00', shape: 'circle' },
-    { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                        spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#D4A800', shape: 'circle' },
+    { code: 'PIG-Z.BR',  name: 'YUZEN-브라운 색소 / Z-Brown',                 spec: '10g',              priceL: 7000,   priceS: 7700,   priceDefault: 8400,  color: '#9e5c3f', shape: 'circle' },
+    { code: 'PWD-Z.BR',  name: 'YUZEN-브라운 색소 분말 / Z-Brown Powder',     spec: '10g, 분말',        priceL: 9000,   priceS: 9900,   priceDefault: 10800, color: '#9e5c3f', shape: 'square' },
+    { code: 'PIG-X.RD',  name: 'X-레드 / X-Red(brick)',                       spec: '10g',              priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#a11515', shape: 'circle' },
+    { code: 'PIG-YL',    name: '옐로우 색소 / Yellow',                        spec: '10g',              priceL: 5000,     priceS: 5500, priceDefault: 6000, color: '#D4A800', shape: 'circle' },
+    { code: 'PIG-Z.RD',  name: 'YUZEN-레드 / Z-Red(vivid)',                   spec: '10g, for Lips',    priceL: 9000,     priceS: 9900, priceDefault: 10800, color: '#f50707', shape: 'circle' },
+    { code: 'PIG-OR',    name: '오렌지 색소 / Orange',                        spec: '10g, for Lips',    priceL: 5000,    priceS: 5500, priceDefault: 6000, color: '#ff6f00', shape: 'circle' },
     { code: 'PIG-MG',    name: '마젠타 색소 / Magenta',                       spec: '10g, for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#e30e87', shape: 'circle' },
-    { code: 'PIG-VT',    name: '바이올렛 색소 / Violet',                      spec: '10g',              priceL: 6000,   priceS: 6600,   priceDefault: 7200,  color: '#6A3D9A', shape: 'circle' },
+    { code: 'PIG-VT',    name: '바이올렛 색소 / Violet',                      spec: '10g, for Lips',    priceL: 6000,   priceS: 6600,   priceDefault: 7200,  color: '#6A3D9A', shape: 'circle' },
     { code: 'PIG-BL',    name: '블루 색소 / Blue',                            spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600,  color: '#274EA6', shape: 'circle' },
     { code: 'PIG-BK',    name: '블랙 색소 / Black',                           spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600,  color: '#1E1E1E', shape: 'circle' },
     { code: 'PIG-WT',    name: '화이트 색소 / White',                         spec: '10g',              priceL: 4500,   priceS: 4900,   priceDefault: 5400,  color: '#F0EDE8', shape: 'circle' },
@@ -23,8 +22,8 @@ const PRODUCTS = {
   binders: [
     { code: 'BND-FND100', name: '파운데이션 바인더 / Foundation Binder',              spec: '100g',            priceL: 23000,  priceS: 25300,  priceDefault: 27600 },
     { code: 'BND-FND1k',  name: '파운데이션 바인더 대용량 / Foundation Binder (1kg)', spec: '1kg',             priceL: 200000, priceS: 220000, priceDefault: 240000 },
-    { code: 'PWD-MAT', name: '매트 파우더 / Matte Powder', spec: '100g, 분말', priceL: 15000, priceS: 16500, priceDefault: 18000 },
-    { code: 'PWD-GLW', name: '글로우 파우더 / Matte Powder', spec: '100g, 분말', priceL: 15000, priceS: 16500, priceDefault: 18000 },
+    { code: 'PWD-MAT',      name: '매트 파우더 / Matte Powder',                       spec: '100g, 분말',       priceL: 15000, priceS: 16500, priceDefault: 18000 },
+    { code: 'PWD-GLW',       name: '글로우 파우더 / Matte Powder',                    spec: '100g, 분말',       priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'BND-LIP1',   name: '립글로스 바인더 / Lip Gloss Binder',                 spec: '50ml',            priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
     { code: 'BND-LIP5',   name: '립글로스 바인더 대용량 / Lip Gloss Binder (250ml)',   spec: '250ml, 5개 묶음', priceL: 34000,  priceS: 37400,  priceDefault: 40800 },
   ],
@@ -47,19 +46,26 @@ const PRODUCTS = {
 // 과정별 주문 가능 제품 코드 (수료번호 첫 segment 기준)
 const COURSE_PRODUCTS = {
   CCM1: [
-    'PIG-Z.BR', 'PIG-X.RD', 'PIG-BRD', 'PIG-Z.RD', 'PIG-YL', 'PIG-WT',
-    'PIG-BL', 'PIG-BK', 'PIG-OR', 'PIG-MG', 'PIG-VT',
+    'PIG-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL','PIG-OR', 'PIG-MG', 
+    'PIG-BL', 'PIG-BK',  'PIG-WT',
     'BND-FND100', 'BND-LIP1',
     'CARD-SK5', 'CARD-LP5',
     'BTL-FDN', 'BTL-LGS',
   ],
   SFDI: [
-    'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-BRD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
-    'PIG-BL', 'PIG-BK',
+    'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL',
+    'PIG-BL', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
     'BND-FND100', 'BND-FND1k', 'PWD-MAT', 'PWD-GLW',
     'CARD-SK5', 'CARD-SK10', 'STCKR-SK5', 'STCKR-SK10',
     'BTL-FDN',
-  ],
+    ],
+  SLGI: [
+    'PIG-X.RD', 'PIG-Z.RD', 'PIG-WT', 'PIG-WT.2',
+    'PIG-BK', 'PIG-OR', 'PIG-MG',
+    'BND-LIP1', 'BND-LIP5',
+    'CARD-LP5', 'CARD-LP10',
+    'BTL-LGS',
+    ],
   KFDI: [
     'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-WT',
     'BND-FND100', 'BND-FND1k',
@@ -71,13 +77,7 @@ const COURSE_PRODUCTS = {
     'PIG-BK', 'PIG-VT',
     'CARD-LC5', 'CARD-LC10',
   ],
-  SLGI: [
-    'PIG-X.RD', 'PIG-Z.RD', 'PIG-WT', 'PIG-WT.2',
-    'PIG-BK', 'PIG-OR', 'PIG-MG',
-    'BND-LIP1', 'BND-LIP5',
-    'CARD-LP5', 'CARD-LP10',
-    'BTL-LGS',
-  ],
+
 };
 
 // MSDS PDF 파일 매핑: 제품코드 → 파일명(public/msds/{파일명}.pdf)
@@ -88,7 +88,6 @@ const MSDS_MAP = {
   'PWD-Z.BR':   'PWD-Z.BR_msds',
   'PIG-X.RD':   'PIG-X.RD_msds',
   'PIG-Z.RD': 'PIG-Z.RD_msds',
-  'PIG-BRD':  'PIG-X.RD_msds',     //공용
   'PIG-YL':     'PIG-YL_msds',
   'PIG-WT':     'PIG-WT_msds',
   'PIG-WT.2':   'PIG-WT_msds',     // 공용
