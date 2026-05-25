@@ -20,7 +20,8 @@ const PRODUCTS = {
     { code: 'PIG-WT.2',  name: '화이트 색소 2개 묶음 / White ×2 Set',        spec: '10g×2',            priceL: 8000,   priceS: 8800,   priceDefault: 9600,  color: '#F0EDE8', shape: 'circle' },
   ],
   binders: [
-    { code: 'BND-FND100', name: '파운데이션 바인더 / Foundation Binder',              spec: '100g',            priceL: 23000,  priceS: 25300,  priceDefault: 27600 },
+    { code: 'BND-FND100', name: '파운데이션 바인더100 / Foundation Binder',              spec: '100g',            priceL: 23000,  priceS: 25300,  priceDefault: 27600 },
+    { code: 'BND-FND500', name: '파운데이션 바인더500 / Foundation Binder',              spec: '500g',            priceL: 110000,  priceS: 121000,  priceDefault: 130000 },
     { code: 'BND-FND1k',  name: '파운데이션 바인더 대용량 / Foundation Binder (1kg)', spec: '1kg',             priceL: 200000, priceS: 220000, priceDefault: 240000 },
     { code: 'PWD-MAT',      name: '매트 파우더 / Matte Powder',                       spec: '100g, 분말',       priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'PWD-GLW',       name: '글로우 파우더 / Matte Powder',                    spec: '100g, 분말',       priceL: 15000, priceS: 16500, priceDefault: 18000 },
@@ -46,22 +47,19 @@ const PRODUCTS = {
 // 과정별 주문 가능 제품 코드 (수료번호 첫 segment 기준)
 const COURSE_PRODUCTS = {
   CCM1: [
-    'PIG-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL','PIG-OR', 'PIG-MG', 
-    'PIG-BL', 'PIG-BK',  'PIG-WT',
-    'BND-FND100', 'BND-LIP1',
+    'PIG-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL','PIG-OR', 'PIG-MG', 'PIG-BL',  'PIG-BK', 'PIG-WT',
+    'BND-FND100', 'BND-FND500', 'BND-LIP1',
     'CARD-SK5', 'CARD-LP5',
     'BTL-FDN', 'BTL-LGS',
   ],
   SFDI: [
-    'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL',
-    'PIG-BL', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
+      'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-BL', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
     'BND-FND100', 'BND-FND1k', 'PWD-MAT', 'PWD-GLW',
     'CARD-SK5', 'CARD-SK10', 'STCKR-SK5', 'STCKR-SK10',
     'BTL-FDN',
     ],
   SLGI: [
-    'PIG-X.RD', 'PIG-Z.RD', 'PIG-WT', 'PIG-WT.2',
-    'PIG-BK', 'PIG-OR', 'PIG-MG',
+    'PIG-X.RD', 'PIG-Z.RD', 'PIG-OR', 'PIG-MG', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
     'BND-LIP1', 'BND-LIP5',
     'CARD-LP5', 'CARD-LP10',
     'BTL-LGS',
@@ -70,11 +68,9 @@ const COURSE_PRODUCTS = {
     'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-WT',
     'BND-FND100', 'BND-FND1k',
     'CARD-SK5', 'CARD-SK10',
-    'BTL-FDN',
   ],
   KLCI: [
-    'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL', 'PIG-WT',
-    'PIG-BK', 'PIG-VT',
+    'PIG-X.RD', 'PIG-Z.RD',  'PIG-VT', 'PIG-WT', 'PIG-BK',
     'CARD-LC5', 'CARD-LC10',
   ],
 
