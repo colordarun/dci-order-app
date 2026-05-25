@@ -193,7 +193,7 @@ export default function DCIOrderApp() {
       setStep('order');
       setTimeout(() => setFadeIn(true), 20);
     } else {
-      setAuthError('수료번호 또는 강사명이 일치하지 않습니다.');
+      setAuthError('수료번호 또는 수료자명이 일치하지 않습니다.');
     }
   };
 
@@ -303,7 +303,7 @@ export default function DCIOrderApp() {
       <div style={styles.container}>
         <div style={styles.authBox}>
           <h1 style={styles.title}>DCI 강사 주문 시스템</h1>
-          <p style={styles.subtitle}>수료번호와 강사명을 입력하세요</p>
+          <p style={styles.subtitle}>수료번호와 수료자명을 입력하세요</p>
           <div style={styles.formGroup}>
             <label style={styles.label}>수료번호</label>
             <input type="text" placeholder="예: ABC-1234-000" value={certNum}
@@ -311,7 +311,7 @@ export default function DCIOrderApp() {
               onKeyPress={(e) => e.key === 'Enter' && handleAuth()} />
           </div>
           <div style={styles.formGroup}>
-            <label style={styles.label}>강사명</label>
+            <label style={styles.label}>수료자명</label>
             <input type="text" placeholder="예: 홍길동, JUNG JIEUN" value={instructorName}
               onChange={(e) => setInstructorName(e.target.value)} style={styles.input}
               onKeyPress={(e) => e.key === 'Enter' && handleAuth()} />
