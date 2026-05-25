@@ -23,7 +23,8 @@ const PRODUCTS = {
   binders: [
     { code: 'BND-FND100', name: '파운데이션 바인더 / Foundation Binder',              spec: '100g',            priceL: 23000,  priceS: 25300,  priceDefault: 27600 },
     { code: 'BND-FND1k',  name: '파운데이션 바인더 대용량 / Foundation Binder (1kg)', spec: '1kg',             priceL: 200000, priceS: 220000, priceDefault: 240000 },
-    { code: 'PWD-MAT',    name: '매트 파우더 / Matte Powder',                         spec: '100g, 분말',      priceL: 15000,  priceS: 16500,  priceDefault: 18000 },
+    { code: 'PWD-MAT', name: '매트 파우더 / Matte Powder', spec: '100g, 분말', priceL: 15000, priceS: 16500, priceDefault: 18000 },
+    { code: 'PWD-GLW', name: '글로우 파우더 / Matte Powder', spec: '100g, 분말', priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'BND-LIP1',   name: '립글로스 바인더 / Lip Gloss Binder',                 spec: '50ml',            priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
     { code: 'BND-LIP5',   name: '립글로스 바인더 대용량 / Lip Gloss Binder (250ml)',   spec: '250ml, 5개 묶음', priceL: 34000,  priceS: 37400,  priceDefault: 40800 },
   ],
@@ -55,18 +56,18 @@ const COURSE_PRODUCTS = {
   SFDI: [
     'PIG-Z.BR', 'PWD-Z.BR', 'PIG-X.RD', 'PIG-BRD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
     'PIG-BL', 'PIG-BK',
-    'BND-FND100', 'BND-FND1k', 'PWD-MAT',
+    'BND-FND100', 'BND-FND1k', 'PWD-MAT', 'PWD-GLW',
     'CARD-SK5', 'CARD-SK10', 'STCKR-SK5', 'STCKR-SK10',
     'BTL-FDN',
   ],
   KFDI: [
-    'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
+    'PWD-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-WT',
     'BND-FND100', 'BND-FND1k',
     'CARD-SK5', 'CARD-SK10',
     'BTL-FDN',
   ],
   KLCI: [
-    'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL', 'PIG-WT', 'PIG-WT.2',
+    'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL', 'PIG-WT',
     'PIG-BK', 'PIG-VT',
     'CARD-LC5', 'CARD-LC10',
   ],
@@ -99,7 +100,7 @@ const MSDS_MAP = {
   'PWD-MAT':    'PWD-MAT_msds',
   'BND-LIP1':   'BND-LIP_msds',
   'BND-LIP5':   'BND-LIP_msds',    // 공용
-  // PIG-BL, PIG-BK → 파일 없음
+  // PIG-BL, PIG-BK, PWD-GLW → 파일 없음
   // CARD, STCKR, BTL → 해당 없음
 };
 
