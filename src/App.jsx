@@ -80,19 +80,19 @@ const COURSE_PRODUCTS = {
 // 같은 파일명 = 공유 MSDS (중복 자동 제거)
 // PDF 파일 추가 시 내게 알려주면 반영해줄게
 const MSDS_MAP = {
-  //'PIG-Z.BR':   'PIG-Z.BR_msds',
-  //'PWD-Z.BR':   'PWD-Z.BR_msds',
-  //'PIG-X.RD':   'PIG-X.RD_msds',
-  //'PIG-Z.RD':   'PIG-Z.RD_msds',
-  //'PIG-YL':     'PIG-YL_msds',
-  //'PIG-WT':     'PIG-WT_msds',
-  //'PIG-WT.2':   'PIG-WT_msds',     // 공용
-  //'PIG-OR':     'PIG-OR_msds',
-  //'PIG-MG':     'PIG-MG_msds',
-  //'PIG-VT':     'PIG-VT_msds',
-  //'BND-FND100': 'BND-FND_msds',
-  //'BND-FND1k':  'BND-FND_msds',    // 공용
-  //'PWD-MAT':    'PWD-MAT_msds',
+  'PIG-Z.BR':   'PIG-Z.BR_msds',
+  'PWD-Z.BR':   'PWD-Z.BR_msds',
+  'PIG-X.RD':   'PIG-X.RD_msds',
+  'PIG-Z.RD':   'PIG-Z.RD_msds',
+  'PIG-YL':     'PIG-YL_msds',
+  'PIG-WT':     'PIG-WT_msds',
+  'PIG-WT.2':   'PIG-WT_msds',     // 공용
+  'PIG-OR':     'PIG-OR_msds',
+  'PIG-MG':     'PIG-MG_msds',
+  'PIG-VT':     'PIG-VT_msds',
+  'BND-FND100': 'BND-FND_msds',
+  'BND-FND1k':  'BND-FND_msds',    // 공용
+  'PWD-MAT':    'PWD-MAT_msds',
   'BND-LIP1':   'BND-LIP_msds',
   'BND-LIP5':   'BND-LIP_msds',    // 공용
   // PIG-BL, PIG-BK, PWD-GLW → 파일 없음
