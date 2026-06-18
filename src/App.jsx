@@ -57,7 +57,7 @@ const COURSE_PRODUCTS = {
   ],
   GBCF: [
     'PIG-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-BL', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
-    'BND-FND100', 'BND-FND500', 'BND-FND1k', 'PWD-MAT', 'PWD-GLW',
+    'BND-FND100', 'BND-FND500', 'BND-FND1k', 'PWD-MAT',
     'CARD-SK5-DCI', 'CARD-SK10-DCI', 'STCKR-SK5-DCI', 'STCKR-SK10-DCI',
     'BTL-FDN',
     ],
