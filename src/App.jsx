@@ -32,12 +32,14 @@ const PRODUCTS = {
   cards: [
     { code: 'CARD-SK5',   name: '스킨용 진단카드*5 / Skin Diagnostic Card *5',              spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
     { code: 'CARD-SK10',  name: '스킨용 진단카드*10 / Skin Diagnostic Card *10',             spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
+    { code: 'CARD-SK5-DCI',   name: 'DCI스킨용 진단카드*5 / DCI-Skin Diagnostic Card *5',              spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
+    { code: 'CARD-SK10-DCI',  name: 'DCI스킨용 진단카드*10 / DCI-Skin Diagnostic Card *10',             spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'CARD-LP5',   name: '립용 진단카드*5 / Lip Diagnostic Card *5',                  spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
     { code: 'CARD-LP10',  name: '립용 진단카드*10 / Lip Diagnostic Card *10',                spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'CARD-LC5',   name: '립앤치크용 진단카드*5 / Lip & Cheek Diagnostic Card *5',    spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
     { code: 'CARD-LC10',  name: '립앤치크용 진단카드*10 / Lip & Cheek Diagnostic Card *10',  spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
-    { code: 'STCKR-SK5',  name: '스킨용 진단 스티커*5 / Skin Diagnostic Sticker *5',         spec: '5개 묶음',  priceL: 20000, priceS: 22000, priceDefault: 24000 },
-    { code: 'STCKR-SK10', name: '스킨용 진단 스티커*10 / Skin Diagnostic Sticker *10',       spec: '10개 묶음', priceL: 30000, priceS: 33000, priceDefault: 36000 },
+    { code: 'STCKR-SK5-DCI',  name: 'DCI스킨용 진단 스티커*5 / DCI-Skin Diagnostic Sticker *5',         spec: '5개 묶음',  priceL: 20000, priceS: 22000, priceDefault: 24000 },
+    { code: 'STCKR-SK10-DCI', name: 'DCI스킨용 진단 스티커*10 / DCI-Skin Diagnostic Sticker *10',       spec: '10개 묶음', priceL: 30000, priceS: 33000, priceDefault: 36000 },
   ],
   bottles: [
     { code: 'BTL-FDN', name: '파운데이션 용기 / Foundation Container', spec: '30g(펌프형)', priceL: 2200, priceS: 2700, priceDefault: 3000 },
@@ -53,13 +55,13 @@ const COURSE_PRODUCTS = {
     'CARD-SK5', 'CARD-LP5',
     'BTL-FDN', 'BTL-LGS',
   ],
-  SFDI: [
-    'PWD-ZL.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-BL', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
-    'BND-FND100', 'BND-FND1k', 'PWD-MAT', 'PWD-GLW',
-    'CARD-SK5', 'CARD-SK10', 'STCKR-SK5', 'STCKR-SK10',
+  GBCF: [
+    'PIG-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-BL', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
+    'BND-FND100', 'BND-FND500', 'BND-FND1k', 'PWD-MAT', 'PWD-GLW',
+    'CARD-SK5-DCI', 'CARD-SK10-DCI', 'STCKR-SK5-DCI', 'STCKR-SK10-DCI',
     'BTL-FDN',
     ],
-  SLGI: [
+  GBCL: [
     'PIG-X.RD', 'PIG-Z.RD', 'PIG-OR', 'PIG-MG', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
     'BND-LIP1', 'BND-LIP5',
     'CARD-LP5', 'CARD-LP10',
