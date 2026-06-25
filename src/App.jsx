@@ -15,7 +15,7 @@ const PRODUCTS = {
     { code: 'PIG-OR',    name: '주황 색소 / Orange',                        spec: '10g, ONLY for Lips',    priceL: 5000,    priceS: 5500, priceDefault: 6000, color: '#ff6f00', shape: 'circle' },
     { code: 'PIG-MG',    name: '마젠타 색소 / Magenta',                     spec: '10g, ONLY for Lips',    priceL: 5000,   priceS: 5500,   priceDefault: 6000,  color: '#e30e87', shape: 'circle' },
     { code: 'PIG-VT',    name: '보라 색소 / Violet',                        spec: '10g, for Lips',    priceL: 6000,   priceS: 6600,   priceDefault: 7200,  color: '#6A3D9A', shape: 'circle' },
-    { code: 'PIG-BL',    name: '검정 색소 / Blue',                          spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600,  color: '#274EA6', shape: 'circle' },
+    { code: 'PIG-BL',    name: '파랑 색소 / Blue',                          spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600,  color: '#274EA6', shape: 'circle' },
     { code: 'PIG-BK',    name: '검정 색소 / Black',                         spec: '5g',               priceL: 3000,   priceS: 3300,   priceDefault: 3600,  color: '#1E1E1E', shape: 'circle' },
     { code: 'PIG-WT',    name: '하양 색소 / White',                         spec: '10g',              priceL: 4500,   priceS: 4900,   priceDefault: 5400,  color: '#F0EDE8', shape: 'circle' },
     { code: 'PIG-WT.2',  name: '하양 색소 2개 묶음 / White ×2 Set',        spec: '10g×2',            priceL: 8000,   priceS: 8800,   priceDefault: 9600,  color: '#F0EDE8', shape: 'circle' },
