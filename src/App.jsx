@@ -29,7 +29,7 @@ const PRODUCTS = {
     { code: 'BND-LIP1',   name: '립글로스 바인더 / Lip Gloss Binder',                 spec: '50ml',            priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
     { code: 'BND-LIP5',   name: '립글로스 바인더 대용량 / Lip Gloss Binder (250ml)',   spec: '250ml, 5개 묶음', priceL: 34000,  priceS: 37400,  priceDefault: 40800 },
   ],
-  cards·stickers: [
+  cards: [
     { code: 'CARD-SK5',   name: '스킨용 진단카드*5 / Skin Diagnostic Card *5',              spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
     { code: 'CARD-SK10',  name: '스킨용 진단카드*10 / Skin Diagnostic Card *10',             spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'CARD-SK5-DCI',   name: 'DCI스킨용 진단카드*5 / DCI-Skin Diagnostic Card *5',              spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
@@ -53,7 +53,7 @@ const COURSE_PRODUCTS = {
   CCM1: [
     'PIG-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL','PIG-OR', 'PIG-MG', 'PIG-BL',  'PIG-BK', 'PIG-WT',
     'BND-FND100', 'BND-FND500', 'BND-LIP1',
-    'CARD-SK5', 'CARD-LP5', 'STCKR-BTL'
+    'CARD-SK5', 'CARD-LP5', 'STCKR-BTL',
     'BTL-FDN', 'BTL-LGS',
   ],
   GBCF: [
