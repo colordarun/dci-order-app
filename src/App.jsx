@@ -40,7 +40,7 @@ const PRODUCTS = {
     { code: 'CARD-LC10',  name: '립앤치크용 진단카드*10 / Lip & Cheek Diagnostic Card *10',  spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'STCKR-SK5-DCI',  name: 'DCI스킨용 진단 스티커*5 / DCI-Skin Diagnostic Sticker *5',         spec: '5개 묶음',  priceL: 20000, priceS: 22000, priceDefault: 24000 },
     { code: 'STCKR-SK10-DCI', name: 'DCI스킨용 진단 스티커*10 / DCI-Skin Diagnostic Sticker *10',       spec: '10개 묶음', priceL: 30000, priceS: 33000, priceDefault: 36000 },
-    { code: 'STCKR-BTL', name: 'DCI스킨용 진단 스티커*1 / DCI-Skin Diagnostic Sticker *1(21ea)',       spec: '1장(21개)', priceL: 4000, priceS: 4400, priceDefault: 5000 },
+    { code: 'STCKR-BTL', name: '파운데이션 용기 라벨지*1(21) / Foundation label Sticker *1(21ea)',       spec: '1장(21개)', priceL: 4000, priceS: 4400, priceDefault: 5000 },
   ],
   bottles: [
     { code: 'BTL-FDN', name: '파운데이션 용기 / Foundation Container', spec: '20ml(펌프형)_약25g', priceL: 2200, priceS: 2700, priceDefault: 3000 },
