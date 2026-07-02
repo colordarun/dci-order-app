@@ -29,7 +29,7 @@ const PRODUCTS = {
     { code: 'BND-LIP1',   name: '립글로스 바인더 / Lip Gloss Binder',                 spec: '50ml',            priceL: 9000,   priceS: 9900,   priceDefault: 10800 },
     { code: 'BND-LIP5',   name: '립글로스 바인더 대용량 / Lip Gloss Binder (250ml)',   spec: '250ml, 5개 묶음', priceL: 34000,  priceS: 37400,  priceDefault: 40800 },
   ],
-  cards: [
+  cards·stickers: [
     { code: 'CARD-SK5',   name: '스킨용 진단카드*5 / Skin Diagnostic Card *5',              spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
     { code: 'CARD-SK10',  name: '스킨용 진단카드*10 / Skin Diagnostic Card *10',             spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'CARD-SK5-DCI',   name: 'DCI스킨용 진단카드*5 / DCI-Skin Diagnostic Card *5',              spec: '5개 묶음',  priceL: 10000, priceS: 11000, priceDefault: 12000 },
@@ -40,6 +40,7 @@ const PRODUCTS = {
     { code: 'CARD-LC10',  name: '립앤치크용 진단카드*10 / Lip & Cheek Diagnostic Card *10',  spec: '10개 묶음', priceL: 15000, priceS: 16500, priceDefault: 18000 },
     { code: 'STCKR-SK5-DCI',  name: 'DCI스킨용 진단 스티커*5 / DCI-Skin Diagnostic Sticker *5',         spec: '5개 묶음',  priceL: 20000, priceS: 22000, priceDefault: 24000 },
     { code: 'STCKR-SK10-DCI', name: 'DCI스킨용 진단 스티커*10 / DCI-Skin Diagnostic Sticker *10',       spec: '10개 묶음', priceL: 30000, priceS: 33000, priceDefault: 36000 },
+    { code: 'STCKR-BTL', name: 'DCI스킨용 진단 스티커*1 / DCI-Skin Diagnostic Sticker *1(21ea)',       spec: '1장(21개)', priceL: 4000, priceS: 4400, priceDefault: 5000 },
   ],
   bottles: [
     { code: 'BTL-FDN', name: '파운데이션 용기 / Foundation Container', spec: '20ml(펌프형)_약25g', priceL: 2200, priceS: 2700, priceDefault: 3000 },
@@ -52,13 +53,13 @@ const COURSE_PRODUCTS = {
   CCM1: [
     'PIG-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL','PIG-OR', 'PIG-MG', 'PIG-BL',  'PIG-BK', 'PIG-WT',
     'BND-FND100', 'BND-FND500', 'BND-LIP1',
-    'CARD-SK5', 'CARD-LP5',
+    'CARD-SK5', 'CARD-LP5', 'STCKR-BTL'
     'BTL-FDN', 'BTL-LGS',
   ],
   GBCF: [
     'PIG-Z.BR', 'PIG-X.RD', 'PIG-YL', 'PIG-BL', 'PIG-BK', 'PIG-WT', 'PIG-WT.2',
     'BND-FND100', 'BND-FND500', 'BND-FND1k', 'PWD-MAT',
-    'CARD-SK5-DCI', 'CARD-SK10-DCI', 'STCKR-SK5-DCI', 'STCKR-SK10-DCI',
+    'CARD-SK5-DCI', 'CARD-SK10-DCI', 'STCKR-SK5-DCI', 'STCKR-SK10-DCI', 'STCKR-BTL',
     'BTL-FDN',
     ],
   GBCL: [
@@ -100,7 +101,7 @@ const MSDS_MAP = {
   'BND-LIP1':   'BND-LIP_msds',
   'BND-LIP5':   'BND-LIP_msds',    // 공용
   // PIG-BL, PIG-BK, PWD-GLW → 파일 없음
-  // CARD, STCKR, BTL → 해당 없음
+  // CARD, STCKR, BTL,STCKR-BTL → 해당 없음
 };
 
 function formatPhone(raw) {
