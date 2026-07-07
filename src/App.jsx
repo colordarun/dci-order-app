@@ -51,9 +51,9 @@ const PRODUCTS = {
 // 과정별 주문 가능 제품 코드 (수료번호 첫 segment 기준)
 const COURSE_PRODUCTS = {
   CCM1: [
-    'PIG-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL','PIG-OR', 'PIG-MG', 'PIG-BL',  'PIG-BK', 'PIG-WT',
+    'PWD-Z.BR', 'PIG-X.RD', 'PIG-Z.RD', 'PIG-YL','PIG-OR', 'PIG-MG', 'PIG-BL',  'PIG-BK', 'PIG-WT',
     'BND-FND100', 'BND-LIP1',
-    'CARD-SK5', 'CARD-LP5', 'STCKR-BTL',
+    'STCKR-BTL',
     'BTL-FDN', 'BTL-LGS',
   ],
   GBCF: [
